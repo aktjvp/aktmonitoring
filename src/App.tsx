@@ -7,6 +7,9 @@ import { MainLayout } from "./components/layout/MainLayout";
 import Dashboard from "./pages/Dashboard";
 import Employees from "./pages/Employees";
 import Departments from "./pages/Departments";
+import Computers from "./pages/Computers";
+import Phones from "./pages/Phones";
+import Printers from "./pages/Printers";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,9 +25,9 @@ const App = () => (
             <Route index element={<Dashboard />} />
             <Route path="employees" element={<Employees />} />
             <Route path="departments" element={<Departments />} />
-            <Route path="computers" element={<Dashboard />} />
-            <Route path="phones" element={<Dashboard />} />
-            <Route path="printers" element={<Dashboard />} />
+            <Route path="computers" element={<Computers />} />
+            <Route path="phones" element={<Phones />} />
+            <Route path="printers" element={<Printers />} />
             <Route path="reports" element={<Dashboard />} />
             <Route path="settings" element={<Dashboard />} />
           </Route>

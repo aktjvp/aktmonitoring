@@ -29,12 +29,33 @@ const employees = [
     department: "IT Bo'limi",
     servicePhone: "+998 90 123 45 67",
     internalPhone: "101",
-    computerModel: "HP EliteDesk 800",
-    computerMAC: "00:1B:44:11:3A:B7",
     phoneMAC: "AA:BB:CC:DD:EE:FF",
-    hasAntivirus: true,
-    hasInternet: true,
+    computerType: "Desktop",
+    computerModel: "HP EliteDesk 800",
+    computerProcessor: "Intel Core i5-10400",
+    ramSize: "8GB",
+    computerMAC: "00:1B:44:11:3A:B7",
+    ssdAvailable: true,
+    ssdSerial: "SSD123456",
+    ssdAsCDrive: true,
+    hddAvailable: false,
+    hddSerial: "",
+    upsAvailable: true,
+    upsStatus: "Ishlayapti",
+    computerName: "IT-DESK-001",
     domainConnected: true,
+    employeeLogin: "s.karimov",
+    biosPassword: true,
+    userPassword: true,
+    sealAvailable: true,
+    sealNumber: "SEAL001",
+    usbPortsOpen: false,
+    hasAntivirus: true,
+    antivirusVersion: "Kaspersky 21.0",
+    hasInternet: true,
+    printerModel: "HP LaserJet Pro 400",
+    printerOwnership: "Tashkilot",
+    chromeVersion: "120.0.6099.109",
   },
   {
     id: 2,
@@ -43,12 +64,33 @@ const employees = [
     department: "Moliya Bo'limi",
     servicePhone: "+998 91 234 56 78",
     internalPhone: "201",
-    computerModel: "Dell OptiPlex 3070",
-    computerMAC: "00:1B:44:11:3A:B8",
     phoneMAC: "BB:CC:DD:EE:FF:AA",
-    hasAntivirus: true,
-    hasInternet: false,
+    computerType: "Laptop",
+    computerModel: "Dell OptiPlex 3070",
+    computerProcessor: "Intel Core i3-8100",
+    ramSize: "4GB",
+    computerMAC: "00:1B:44:11:3A:B8",
+    ssdAvailable: false,
+    ssdSerial: "",
+    ssdAsCDrive: false,
+    hddAvailable: true,
+    hddSerial: "HDD789012",
+    upsAvailable: false,
+    upsStatus: "Yo'q",
+    computerName: "FIN-LAP-002",
     domainConnected: true,
+    employeeLogin: "n.rahimova",
+    biosPassword: false,
+    userPassword: true,
+    sealAvailable: false,
+    sealNumber: "",
+    usbPortsOpen: true,
+    hasAntivirus: true,
+    antivirusVersion: "Avast 23.1",
+    hasInternet: false,
+    printerModel: "",
+    printerOwnership: "Yo'q",
+    chromeVersion: "119.0.6045.160",
   },
   {
     id: 3,
@@ -57,12 +99,33 @@ const employees = [
     department: "HR Bo'limi",
     servicePhone: "+998 93 345 67 89",
     internalPhone: "301",
-    computerModel: "Lenovo ThinkCentre M720",
-    computerMAC: "00:1B:44:11:3A:B9",
     phoneMAC: "CC:DD:EE:FF:AA:BB",
-    hasAntivirus: false,
-    hasInternet: true,
+    computerType: "Monoblock",
+    computerModel: "Lenovo ThinkCentre M720",
+    computerProcessor: "AMD Ryzen 5 3400G",
+    ramSize: "16GB",
+    computerMAC: "00:1B:44:11:3A:B9",
+    ssdAvailable: true,
+    ssdSerial: "SSD345678",
+    ssdAsCDrive: true,
+    hddAvailable: true,
+    hddSerial: "HDD901234",
+    upsAvailable: true,
+    upsStatus: "Nosoz",
+    computerName: "HR-MONO-003",
     domainConnected: false,
+    employeeLogin: "b.toshmatov",
+    biosPassword: true,
+    userPassword: false,
+    sealAvailable: true,
+    sealNumber: "SEAL003",
+    usbPortsOpen: true,
+    hasAntivirus: false,
+    antivirusVersion: "",
+    hasInternet: true,
+    printerModel: "Canon PIXMA G2010",
+    printerOwnership: "Shaxsiy",
+    chromeVersion: "118.0.5993.117",
   },
 ];
 
@@ -138,11 +201,11 @@ export default function Employees() {
               <TableHeader>
                 <TableRow>
                   <TableHead>F.I.Sh.</TableHead>
-                  <TableHead>Lavozim</TableHead>
-                  <TableHead>Bo'lim</TableHead>
-                  <TableHead>Telefon</TableHead>
-                  <TableHead>Kompyuter</TableHead>
-                  <TableHead>Holat</TableHead>
+                  <TableHead>Lavozim/Bo'lim</TableHead>
+                  <TableHead>Telefon ma'lumotlari</TableHead>
+                  <TableHead>Kompyuter ma'lumotlari</TableHead>
+                  <TableHead>Tizim ma'lumotlari</TableHead>
+                  <TableHead>Xavfsizlik</TableHead>
                   <TableHead>Harakatlar</TableHead>
                 </TableRow>
               </TableHeader>
@@ -150,24 +213,53 @@ export default function Employees() {
                 {filteredEmployees.map((employee) => (
                   <TableRow key={employee.id}>
                     <TableCell className="font-medium">
-                      {employee.fullName}
-                    </TableCell>
-                    <TableCell>{employee.position}</TableCell>
-                    <TableCell>{employee.department}</TableCell>
-                    <TableCell>
-                      <div className="text-sm">
-                        <div>{employee.servicePhone}</div>
-                        <div className="text-muted-foreground">
-                          Ichki: {employee.internalPhone}
-                        </div>
+                      <div>
+                        <div className="font-semibold">{employee.fullName}</div>
+                        <div className="text-xs text-muted-foreground">Login: {employee.employeeLogin}</div>
                       </div>
                     </TableCell>
                     <TableCell>
                       <div className="text-sm">
-                        <div>{employee.computerModel}</div>
-                        <div className="text-muted-foreground text-xs">
-                          {employee.computerMAC}
+                        <div className="font-medium">{employee.position}</div>
+                        <div className="text-muted-foreground">{employee.department}</div>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <div className="text-sm space-y-1">
+                        <div>Xizmat: {employee.servicePhone}</div>
+                        <div>Ichki: {employee.internalPhone}</div>
+                        <div className="text-xs text-muted-foreground">MAC: {employee.phoneMAC}</div>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <div className="text-sm space-y-1">
+                        <div className="font-medium">{employee.computerModel}</div>
+                        <div className="text-xs text-muted-foreground">{employee.computerType}</div>
+                        <div className="text-xs">{employee.computerProcessor}</div>
+                        <div className="text-xs">RAM: {employee.ramSize}</div>
+                        <div className="text-xs text-muted-foreground">MAC: {employee.computerMAC}</div>
+                        <div className="text-xs">Nomi: {employee.computerName}</div>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <div className="text-sm space-y-1">
+                        <div className="flex items-center gap-1">
+                          <Badge variant={employee.ssdAvailable ? "default" : "outline"} className="text-xs">
+                            SSD {employee.ssdAvailable ? "+" : "-"}
+                          </Badge>
+                          <Badge variant={employee.hddAvailable ? "default" : "outline"} className="text-xs">
+                            HDD {employee.hddAvailable ? "+" : "-"}
+                          </Badge>
                         </div>
+                        <div className="flex items-center gap-1">
+                          <Badge variant={employee.upsAvailable ? "default" : "outline"} className="text-xs">
+                            UPS {employee.upsAvailable ? employee.upsStatus : "Yo'q"}
+                          </Badge>
+                        </div>
+                        <div className="text-xs">Chrome: {employee.chromeVersion}</div>
+                        {employee.printerModel && (
+                          <div className="text-xs">Printer: {employee.printerModel}</div>
+                        )}
                       </div>
                     </TableCell>
                     <TableCell>
@@ -176,7 +268,7 @@ export default function Employees() {
                           variant={employee.hasAntivirus ? "default" : "destructive"}
                           className="text-xs w-fit"
                         >
-                          {employee.hasAntivirus ? "Antivirus +" : "Antivirus -"}
+                          {employee.hasAntivirus ? `Antivirus: ${employee.antivirusVersion}` : "Antivirus yo'q"}
                         </Badge>
                         <Badge 
                           variant={employee.hasInternet ? "default" : "secondary"}
@@ -189,6 +281,22 @@ export default function Employees() {
                           className="text-xs w-fit"
                         >
                           {employee.domainConnected ? "Domen +" : "Domen -"}
+                        </Badge>
+                        <div className="flex gap-1 mt-1">
+                          <Badge variant={employee.biosPassword ? "default" : "outline"} className="text-xs">
+                            BIOS {employee.biosPassword ? "+" : "-"}
+                          </Badge>
+                          <Badge variant={employee.userPassword ? "default" : "outline"} className="text-xs">
+                            User {employee.userPassword ? "+" : "-"}
+                          </Badge>
+                        </div>
+                        <div className="flex gap-1">
+                          <Badge variant={employee.sealAvailable ? "default" : "outline"} className="text-xs">
+                            Plomba {employee.sealAvailable ? employee.sealNumber : "-"}
+                          </Badge>
+                        </div>
+                        <Badge variant={employee.usbPortsOpen ? "destructive" : "default"} className="text-xs w-fit">
+                          USB {employee.usbPortsOpen ? "Ochiq" : "Yopiq"}
                         </Badge>
                       </div>
                     </TableCell>
