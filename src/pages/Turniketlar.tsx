@@ -23,44 +23,61 @@ import {
 import { useState } from "react";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Cell } from "recharts";
 
-const turnstileData = [
-  {
-    id: 1,
-    location: "Asosiy kirish",
-    deviceCount: 2,
-    activeDevices: 2,
-    dailyEntries: 145,
-    dailyExits: 142,
-    status: "active"
-  },
-  {
-    id: 2,
-    location: "Yon kirish",
-    deviceCount: 1,
-    activeDevices: 1,
-    dailyEntries: 67,
-    dailyExits: 65,
-    status: "active"
-  },
-  {
-    id: 3,
-    location: "Xizmat ko'rsatish kirishi",
-    deviceCount: 1,
-    activeDevices: 0,
-    dailyEntries: 0,
-    dailyExits: 0,
-    status: "inactive"
-  },
-  {
-    id: 4,
-    location: "Favqulodda chiqish",
-    deviceCount: 2,
-    activeDevices: 1,
-    dailyEntries: 23,
-    dailyExits: 25,
-    status: "partial"
-  }
-];
+const turnstileDataByDistrict = {
+  "Toshkent shahar": [
+    {
+      id: 1,
+      location: "Asosiy kirish",
+      deviceCount: 2,
+      activeDevices: 2,
+      dailyEntries: 145,
+      dailyExits: 142,
+      status: "active"
+    },
+    {
+      id: 2,
+      location: "Yon kirish",
+      deviceCount: 1,
+      activeDevices: 1,
+      dailyEntries: 67,
+      dailyExits: 65,
+      status: "active"
+    }
+  ],
+  "Andijon viloyati": [
+    {
+      id: 3,
+      location: "Viloyat markazi kirish",
+      deviceCount: 1,
+      activeDevices: 0,
+      dailyEntries: 0,
+      dailyExits: 0,
+      status: "inactive"
+    },
+    {
+      id: 4,
+      location: "Xizmat ko'rsatish kirishi",
+      deviceCount: 2,
+      activeDevices: 1,
+      dailyEntries: 23,
+      dailyExits: 25,
+      status: "partial"
+    }
+  ],
+  "Samarqand viloyati": [
+    {
+      id: 5,
+      location: "Asosiy eshik",
+      deviceCount: 2,
+      activeDevices: 2,
+      dailyEntries: 89,
+      dailyExits: 87,
+      status: "active"
+    }
+  ]
+};
+
+const turnstileData = Object.values(turnstileDataByDistrict).flat();
 
 const chartData = turnstileData.map(item => ({
   location: item.location.split(' ')[0],
@@ -70,10 +87,18 @@ const chartData = turnstileData.map(item => ({
 
 export default function Turniketlar() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedDistrict, setSelectedDistrict] = useState("");
 
-  const filteredData = turnstileData.filter(item =>
-    item.location.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredDataByDistrict = Object.entries(turnstileDataByDistrict).reduce((acc, [district, items]) => {
+    const filteredItems = items.filter(item =>
+      item.location.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      (selectedDistrict === "" || district === selectedDistrict)
+    );
+    if (filteredItems.length > 0) {
+      acc[district] = filteredItems;
+    }
+    return acc;
+  }, {} as typeof turnstileDataByDistrict);
 
   const totalDevices = turnstileData.reduce((sum, item) => sum + item.deviceCount, 0);
   const activeDevices = turnstileData.reduce((sum, item) => sum + item.activeDevices, 0);
@@ -188,69 +213,88 @@ export default function Turniketlar() {
         <CardHeader>
           <div className="flex items-center justify-between">
             <CardTitle>Turniketlar ro'yxati</CardTitle>
-            <div className="flex items-center space-x-2">
-              <Search className="h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Joylashuv bo'yicha qidirish..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-64"
-              />
+            <div className="flex items-center space-x-4">
+              <select
+                value={selectedDistrict}
+                onChange={(e) => setSelectedDistrict(e.target.value)}
+                className="px-3 py-2 border border-input rounded-md bg-background"
+              >
+                <option value="">Barcha tumanlar</option>
+                {Object.keys(turnstileDataByDistrict).map(district => (
+                  <option key={district} value={district}>{district}</option>
+                ))}
+              </select>
+              <div className="flex items-center space-x-2">
+                <Search className="h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder="Joylashuv bo'yicha qidirish..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-64"
+                />
+              </div>
             </div>
           </div>
         </CardHeader>
         <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Joylashuv</TableHead>
-                <TableHead>Qurilmalar soni</TableHead>
-                <TableHead>Faol qurilmalar</TableHead>
-                <TableHead>Holat</TableHead>
-                <TableHead>Kunlik kirishlar</TableHead>
-                <TableHead>Kunlik chiqishlar</TableHead>
-                <TableHead>Farq</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filteredData.map((item) => (
-                <TableRow key={item.id}>
-                  <TableCell className="font-medium">
-                    <div className="flex items-center">
-                      {getStatusIcon(item.status, item.activeDevices, item.deviceCount)}
-                      <span className="ml-2">{item.location}</span>
-                    </div>
-                  </TableCell>
-                  <TableCell>{item.deviceCount}</TableCell>
-                  <TableCell>
-                    <span className={item.activeDevices === item.deviceCount ? "text-green-600" : "text-red-600"}>
-                      {item.activeDevices}
-                    </span>
-                  </TableCell>
-                  <TableCell>
-                    {getStatusBadge(item.status, item.activeDevices, item.deviceCount)}
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center">
-                      <Users className="h-4 w-4 mr-1 text-green-600" />
-                      {item.dailyEntries}
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center">
-                      <UserCheck className="h-4 w-4 mr-1 text-blue-600" />
-                      {item.dailyExits}
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <Badge variant={item.dailyEntries - item.dailyExits >= 0 ? "default" : "secondary"}>
-                      {item.dailyEntries - item.dailyExits > 0 ? "+" : ""}{item.dailyEntries - item.dailyExits}
-                    </Badge>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+          <div className="space-y-6">
+            {Object.entries(filteredDataByDistrict).map(([district, items]) => (
+              <div key={district}>
+                <h3 className="text-lg font-semibold mb-3 text-primary">{district}</h3>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Joylashuv</TableHead>
+                      <TableHead>Qurilmalar soni</TableHead>
+                      <TableHead>Faol qurilmalar</TableHead>
+                      <TableHead>Holat</TableHead>
+                      <TableHead>Kunlik kirishlar</TableHead>
+                      <TableHead>Kunlik chiqishlar</TableHead>
+                      <TableHead>Farq</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {items.map((item) => (
+                      <TableRow key={item.id}>
+                        <TableCell className="font-medium">
+                          <div className="flex items-center">
+                            {getStatusIcon(item.status, item.activeDevices, item.deviceCount)}
+                            <span className="ml-2">{item.location}</span>
+                          </div>
+                        </TableCell>
+                        <TableCell>{item.deviceCount}</TableCell>
+                        <TableCell>
+                          <span className={item.activeDevices === item.deviceCount ? "text-green-600" : "text-red-600"}>
+                            {item.activeDevices}
+                          </span>
+                        </TableCell>
+                        <TableCell>
+                          {getStatusBadge(item.status, item.activeDevices, item.deviceCount)}
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center">
+                            <Users className="h-4 w-4 mr-1 text-green-600" />
+                            {item.dailyEntries}
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center">
+                            <UserCheck className="h-4 w-4 mr-1 text-blue-600" />
+                            {item.dailyExits}
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <Badge variant={item.dailyEntries - item.dailyExits >= 0 ? "default" : "secondary"}>
+                            {item.dailyEntries - item.dailyExits > 0 ? "+" : ""}{item.dailyEntries - item.dailyExits}
+                          </Badge>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            ))}
+          </div>
         </CardContent>
       </Card>
     </div>
