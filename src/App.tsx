@@ -10,6 +10,8 @@ import Departments from "./pages/Departments";
 import Computers from "./pages/Computers";
 import Phones from "./pages/Phones";
 import Printers from "./pages/Printers";
+import Serverxonalar from "./pages/Serverxonalar";
+import Turniketlar from "./pages/Turniketlar";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +30,8 @@ const App = () => (
             <Route path="computers" element={<Computers />} />
             <Route path="phones" element={<Phones />} />
             <Route path="printers" element={<Printers />} />
+            <Route path="serverxonalar" element={<Serverxonalar />} />
+            <Route path="turniketlar" element={<Turniketlar />} />
             <Route path="reports" element={<Dashboard />} />
             <Route path="settings" element={<Dashboard />} />
           </Route>

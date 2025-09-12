@@ -12,6 +12,8 @@ import {
   Home,
   Smartphone,
   Printer,
+  Server,
+  DoorOpen,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -45,6 +47,16 @@ const menuItems = [
     title: "Printerlar",
     icon: Printer,
     href: "/printers",
+  },
+  {
+    title: "Serverxonalar",
+    icon: Server,
+    href: "/serverxonalar",
+  },
+  {
+    title: "Turniketlar",
+    icon: DoorOpen,
+    href: "/turniketlar",
   },
   {
     title: "Hisobotlar",
