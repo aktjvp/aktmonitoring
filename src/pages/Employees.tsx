@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -130,6 +131,7 @@ const employees = [
 ];
 
 export default function Employees() {
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedDepartment, setSelectedDepartment] = useState("all");
 
@@ -149,7 +151,7 @@ export default function Employees() {
             Xodimlar va ularning texnik jihozlari ro'yxati
           </p>
         </div>
-        <Button className="bg-primary hover:bg-primary/90">
+        <Button className="bg-primary hover:bg-primary/90" onClick={() => navigate("/employees/add")}>
           <Plus className="mr-2 h-4 w-4" />
           Yangi xodim qo'shish
         </Button>
