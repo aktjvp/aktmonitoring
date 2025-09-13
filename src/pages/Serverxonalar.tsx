@@ -33,128 +33,172 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-const serverRoomsByDistrict = {
-  "Toshkent shahar": [
-    {
-      id: 1,
-      location: "Markaziy bino, 1-qavat",
-      doorMaterial: "Temir",
-      windowBars: true,
-      fireAlarm: true,
-      securityAlarm: true,
-      fireExtinguisher: true,
-      cameras: 2,
-      airConditioner: "18000 BTU",
-      floorMaterial: "Antistatik gilam",
-      carpetUnderEquipment: false,
-      cableManagement: true,
-      thermometer: "Raqamli",
-      grounding: true,
-      cabinetCondition: "Yaxshi",
-      equipment: {
-        servers: 4,
-        routers: 2,
-        switches: 6,
-        ups: 3,
-        stabilizers: 2
+const serverRoomsByProvince = {
+  "Toshkent viloyati": {
+    "Toshkent shahar": [
+      {
+        id: 1,
+        location: "Markaziy bino, 1-qavat",
+        doorMaterial: "Temir",
+        windowBars: true,
+        fireAlarm: true,
+        securityAlarm: true,
+        fireExtinguisher: true,
+        cameras: 2,
+        airConditioner: "18000 BTU",
+        floorMaterial: "Antistatik gilam",
+        carpetUnderEquipment: false,
+        cableManagement: true,
+        thermometer: "Raqamli",
+        grounding: true,
+        telecomCabinet: "Yaxshi holatda",
+        equipment: {
+          servers: 8,
+          routers: 2,
+          switches: 4,
+          ups: 2,
+          stabilizers: 2
+        }
+      },
+      {
+        id: 2,
+        location: "Yon bino, 2-qavat",
+        doorMaterial: "Taxta-temir",
+        windowBars: true,
+        fireAlarm: false,
+        securityAlarm: true,
+        fireExtinguisher: true,
+        cameras: 1,
+        airConditioner: "12000 BTU",
+        floorMaterial: "Beton",
+        carpetUnderEquipment: true,
+        cableManagement: false,
+        thermometer: "Analog",
+        grounding: false,
+        telecomCabinet: "Ta'mir talab qiladi",
+        equipment: {
+          servers: 4,
+          routers: 1,
+          switches: 2,
+          ups: 1,
+          stabilizers: 1
+        }
       }
-    },
-    {
-      id: 2,
-      location: "Shimoliy bino, 2-qavat",
-      doorMaterial: "Taxta",
-      windowBars: false,
-      fireAlarm: false,
-      securityAlarm: true,
-      fireExtinguisher: true,
-      cameras: 1,
-      airConditioner: "12000 BTU",
-      floorMaterial: "Beton",
-      carpetUnderEquipment: true,
-      cableManagement: false,
-      thermometer: "Analog",
-      grounding: true,
-      cabinetCondition: "O'rtacha",
-      equipment: {
-        servers: 2,
-        routers: 1,
-        switches: 3,
-        ups: 2,
-        stabilizers: 1
+    ],
+    "Chirchiq shahar": [
+      {
+        id: 3,
+        location: "Ma'muriy bino, 1-qavat",
+        doorMaterial: "Temir",
+        windowBars: true,
+        fireAlarm: true,
+        securityAlarm: true,
+        fireExtinguisher: true,
+        cameras: 2,
+        airConditioner: "24000 BTU",
+        floorMaterial: "Antistatik gilam",
+        carpetUnderEquipment: false,
+        cableManagement: true,
+        thermometer: "Raqamli",
+        grounding: true,
+        telecomCabinet: "Yaxshi holatda",
+        equipment: {
+          servers: 6,
+          routers: 1,
+          switches: 3,
+          ups: 2,
+          stabilizers: 1
+        }
       }
-    }
-  ],
-  "Andijon viloyati": [
-    {
-      id: 3,
-      location: "Viloyat markazi, asosiy bino",
-      doorMaterial: "Temir",
-      windowBars: true,
-      fireAlarm: true,
-      securityAlarm: true,
-      fireExtinguisher: true,
-      cameras: 1,
-      airConditioner: "24000 BTU",
-      floorMaterial: "Keramik",
-      carpetUnderEquipment: false,
-      cableManagement: true,
-      thermometer: "Raqamli",
-      grounding: true,
-      cabinetCondition: "Yaxshi",
-      equipment: {
-        servers: 3,
-        routers: 2,
-        switches: 4,
-        ups: 2,
-        stabilizers: 2
+    ]
+  },
+  "Samarqand viloyati": {
+    "Samarqand shahar": [
+      {
+        id: 4,
+        location: "Markaziy ofis, 3-qavat",
+        doorMaterial: "Temir",
+        windowBars: true,
+        fireAlarm: true,
+        securityAlarm: false,
+        fireExtinguisher: true,
+        cameras: 1,
+        airConditioner: "18000 BTU",
+        floorMaterial: "Laminat",
+        carpetUnderEquipment: false,
+        cableManagement: true,
+        thermometer: "Raqamli",
+        grounding: true,
+        telecomCabinet: "Yaxshi holatda",
+        equipment: {
+          servers: 5,
+          routers: 1,
+          switches: 2,
+          ups: 1,
+          stabilizers: 1
+        }
       }
-    }
-  ],
-  "Samarqand viloyati": [
-    {
-      id: 4,
-      location: "Tumanhukumat binosi",
-      doorMaterial: "Temir",
-      windowBars: true,
-      fireAlarm: false,
-      securityAlarm: true,
-      fireExtinguisher: true,
-      cameras: 2,
-      airConditioner: "12000 BTU",
-      floorMaterial: "Linoleum",
-      carpetUnderEquipment: true,
-      cableManagement: true,
-      thermometer: "Analog",
-      grounding: false,
-      cabinetCondition: "O'rtacha",
-      equipment: {
-        servers: 1,
-        routers: 1,
-        switches: 2,
-        ups: 1,
-        stabilizers: 1
+    ]
+  },
+  "Farg'ona viloyati": {
+    "Farg'ona shahar": [
+      {
+        id: 5,
+        location: "IT markaz, 2-qavat",
+        doorMaterial: "Temir",
+        windowBars: true,
+        fireAlarm: true,
+        securityAlarm: true,
+        fireExtinguisher: false,
+        cameras: 3,
+        airConditioner: "30000 BTU",
+        floorMaterial: "Antistatik gilam",
+        carpetUnderEquipment: false,
+        cableManagement: true,
+        thermometer: "Smart",
+        grounding: true,
+        telecomCabinet: "A'lo holatda",
+        equipment: {
+          servers: 10,
+          routers: 2,
+          switches: 5,
+          ups: 3,
+          stabilizers: 2
+        }
       }
-    }
-  ]
+    ]
+  }
 };
 
-const serverRooms = Object.values(serverRoomsByDistrict).flat();
+const serverRooms = Object.values(serverRoomsByProvince)
+  .flatMap(province => Object.values(province))
+  .flat();
 
 export default function Serverxonalar() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedRoom, setSelectedRoom] = useState<typeof serverRooms[0] | null>(null);
+  const [selectedProvince, setSelectedProvince] = useState("");
   const [selectedDistrict, setSelectedDistrict] = useState("");
 
-  const filteredRoomsByDistrict = Object.entries(serverRoomsByDistrict).reduce((acc, [district, rooms]) => {
-    const filteredRooms = rooms.filter(room =>
-      room.location.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      (selectedDistrict === "" || district === selectedDistrict)
-    );
-    if (filteredRooms.length > 0) {
-      acc[district] = filteredRooms;
+  const filteredRoomsByProvince = Object.entries(serverRoomsByProvince).reduce((acc, [province, districts]) => {
+    if (selectedProvince === "" || province === selectedProvince) {
+      const filteredDistricts = Object.entries(districts).reduce((districtAcc, [district, rooms]) => {
+        const filteredRooms = rooms.filter(room =>
+          room.location.toLowerCase().includes(searchTerm.toLowerCase()) &&
+          (selectedDistrict === "" || district === selectedDistrict)
+        );
+        if (filteredRooms.length > 0) {
+          districtAcc[district] = filteredRooms;
+        }
+        return districtAcc;
+      }, {} as typeof districts);
+      
+      if (Object.keys(filteredDistricts).length > 0) {
+        acc[province] = filteredDistricts;
+      }
     }
     return acc;
-  }, {} as typeof serverRoomsByDistrict);
+  }, {} as typeof serverRoomsByProvince);
 
   const totalRooms = serverRooms.length;
   const totalServers = serverRooms.reduce((sum, room) => sum + room.equipment.servers, 0);
@@ -205,12 +249,22 @@ export default function Serverxonalar() {
             <CardTitle>Serverxonalar ro'yxati</CardTitle>
             <div className="flex items-center space-x-4">
               <select
+                value={selectedProvince}
+                onChange={(e) => setSelectedProvince(e.target.value)}
+                className="px-3 py-2 border border-input rounded-md bg-background"
+              >
+                <option value="">Barcha viloyatlar</option>
+                {Object.keys(serverRoomsByProvince).map(province => (
+                  <option key={province} value={province}>{province}</option>
+                ))}
+              </select>
+              <select
                 value={selectedDistrict}
                 onChange={(e) => setSelectedDistrict(e.target.value)}
                 className="px-3 py-2 border border-input rounded-md bg-background"
               >
                 <option value="">Barcha tumanlar</option>
-                {Object.keys(serverRoomsByDistrict).map(district => (
+                {selectedProvince && Object.keys(serverRoomsByProvince[selectedProvince]).map(district => (
                   <option key={district} value={district}>{district}</option>
                 ))}
               </select>
@@ -228,23 +282,26 @@ export default function Serverxonalar() {
         </CardHeader>
         <CardContent>
           <div className="space-y-6">
-            {Object.entries(filteredRoomsByDistrict).map(([district, rooms]) => (
-              <div key={district}>
-                <h3 className="text-lg font-semibold mb-3 text-primary">{district}</h3>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Joylashuv</TableHead>
-                      <TableHead>Eshik materiali</TableHead>
-                      <TableHead>Xavfsizlik</TableHead>
-                      <TableHead>Konditsioner</TableHead>
-                      <TableHead>Texnikalar</TableHead>
-                      <TableHead>Holat</TableHead>
-                      <TableHead>Amallar</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {rooms.map((room) => (
+            {Object.entries(filteredRoomsByProvince).map(([province, districts]) => (
+              <div key={province} className="space-y-4">
+                <h2 className="text-xl font-bold text-primary border-b pb-2">{province}</h2>
+                {Object.entries(districts).map(([district, rooms]) => (
+                  <div key={district} className="ml-4">
+                    <h3 className="text-lg font-semibold mb-3 text-muted-foreground">{district}</h3>
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Joylashuv</TableHead>
+                          <TableHead>Eshik materiali</TableHead>
+                          <TableHead>Xavfsizlik</TableHead>
+                          <TableHead>Konditsioner</TableHead>
+                          <TableHead>Texnikalar</TableHead>
+                          <TableHead>Holat</TableHead>
+                          <TableHead>Amallar</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {rooms.map((room) => (
                       <TableRow key={room.id}>
                         <TableCell className="font-medium">{room.location}</TableCell>
                         <TableCell>
@@ -267,8 +324,8 @@ export default function Serverxonalar() {
                           </div>
                         </TableCell>
                         <TableCell>
-                          <Badge variant={room.cabinetCondition === "Yaxshi" ? "default" : "secondary"}>
-                            {room.cabinetCondition}
+                          <Badge variant={room.telecomCabinet === "Yaxshi holatda" ? "default" : "secondary"}>
+                            {room.telecomCabinet}
                           </Badge>
                         </TableCell>
                         <TableCell>
@@ -292,7 +349,7 @@ export default function Serverxonalar() {
                                         <div>Joylashuv: {selectedRoom.location}</div>
                                         <div>Eshik materiali: {selectedRoom.doorMaterial}</div>
                                         <div>Pol materiali: {selectedRoom.floorMaterial}</div>
-                                        <div>Kabinet holati: {selectedRoom.cabinetCondition}</div>
+                                        <div>Kabinet holati: {selectedRoom.telecomCabinet}</div>
                                       </div>
                                     </div>
                                     <div>
@@ -351,7 +408,9 @@ export default function Serverxonalar() {
               </div>
             ))}
           </div>
-        </CardContent>
+        ))}
+      </div>
+    </CardContent>
       </Card>
     </div>
   );
