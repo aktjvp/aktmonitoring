@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -48,6 +49,7 @@ const departments = [
 ];
 
 export default function Departments() {
+  const navigate = useNavigate();
   const totalEmployees = departments.reduce((sum, dept) => sum + dept.employeeCount, 0);
   const totalComputers = departments.reduce((sum, dept) => sum + dept.computerCount, 0);
   const totalPhones = departments.reduce((sum, dept) => sum + dept.phoneCount, 0);
@@ -62,7 +64,7 @@ export default function Departments() {
             Tashkilot bo'limlari va ularning texnik jihozlari
           </p>
         </div>
-        <Button className="bg-primary hover:bg-primary/90">
+        <Button className="bg-primary hover:bg-primary/90" onClick={() => navigate("/departments/add")}>
           <Plus className="mr-2 h-4 w-4" />
           Yangi bo'lim qo'shish
         </Button>

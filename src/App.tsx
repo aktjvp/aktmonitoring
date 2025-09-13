@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import Employees from "./pages/Employees";
 import AddEmployee from "./pages/AddEmployee";
 import Departments from "./pages/Departments";
+import AddDepartment from "./pages/AddDepartment";
 import Computers from "./pages/Computers";
 import Phones from "./pages/Phones";
 import Printers from "./pages/Printers";
@@ -29,6 +30,7 @@ const App = () => (
             <Route path="employees" element={<Employees />} />
             <Route path="employees/add" element={<AddEmployee />} />
             <Route path="departments" element={<Departments />} />
+            <Route path="departments/add" element={<AddDepartment />} />
             <Route path="computers" element={<Computers />} />
             <Route path="phones" element={<Phones />} />
             <Route path="printers" element={<Printers />} />
