@@ -102,59 +102,57 @@ export default function Departments() {
       {/* Departments Grid */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {departments.map((department) => (
-          <Card key={department.id} className="shadow-soft hover:shadow-medium transition-shadow">
-            <CardHeader className="pb-4">
-              <div className="flex items-start justify-between">
+          <Card key={department.id} className="hover:shadow-lg transition-all duration-200 border-0 shadow-md">
+            <CardHeader className="pb-3">
+              <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-primary/10 rounded-lg">
-                    <Building2 className="h-6 w-6 text-primary" />
+                  <div className="p-3 bg-primary/10 rounded-xl">
+                    <Building2 className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <CardTitle className="text-lg">{department.name}</CardTitle>
-                    <p className="text-sm text-muted-foreground">{department.location}</p>
+                    <CardTitle className="text-lg font-semibold">{department.name}</CardTitle>
+                    <p className="text-sm text-muted-foreground mt-1">{department.location}</p>
                   </div>
                 </div>
                 <div className="flex gap-1">
-                  <Button variant="ghost" size="sm">
+                  <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                     <Edit className="h-4 w-4" />
                   </Button>
-                  <Button variant="ghost" size="sm">
+                  <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                     <Trash2 className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div>
-                <p className="text-sm font-medium text-muted-foreground">Bo'lim rahbari</p>
-                <p className="text-sm">{department.head}</p>
+              <div className="bg-muted/30 p-3 rounded-lg">
+                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1">Bo'lim rahbari</p>
+                <p className="text-sm font-medium">{department.head}</p>
               </div>
               
-              <div className="space-y-2">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-muted-foreground">Xodimlar:</span>
-                  <Badge variant="secondary">{department.employeeCount}</Badge>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="text-center p-2 bg-blue-50 rounded-lg">
+                  <p className="text-xs text-muted-foreground">Xodimlar</p>
+                  <p className="text-lg font-bold text-blue-600">{department.employeeCount}</p>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-muted-foreground">Kompyuterlar:</span>
-                  <Badge variant="secondary">{department.computerCount}</Badge>
+                <div className="text-center p-2 bg-green-50 rounded-lg">
+                  <p className="text-xs text-muted-foreground">Kompyuterlar</p>
+                  <p className="text-lg font-bold text-green-600">{department.computerCount}</p>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-muted-foreground">Telefonlar:</span>
-                  <Badge variant="secondary">{department.phoneCount}</Badge>
+                <div className="text-center p-2 bg-purple-50 rounded-lg">
+                  <p className="text-xs text-muted-foreground">Telefonlar</p>
+                  <p className="text-lg font-bold text-purple-600">{department.phoneCount}</p>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-muted-foreground">Printerlar:</span>
-                  <Badge variant="secondary">{department.printerCount}</Badge>
+                <div className="text-center p-2 bg-orange-50 rounded-lg">
+                  <p className="text-xs text-muted-foreground">Printerlar</p>
+                  <p className="text-lg font-bold text-orange-600">{department.printerCount}</p>
                 </div>
               </div>
 
-              <div className="pt-2 border-t">
-                <Button variant="outline" className="w-full" size="sm">
-                  <Users className="mr-2 h-4 w-4" />
-                  Xodimlarni ko'rish
-                </Button>
-              </div>
+              <Button variant="outline" className="w-full mt-4" size="sm">
+                <Users className="mr-2 h-4 w-4" />
+                Xodimlarni ko'rish
+              </Button>
             </CardContent>
           </Card>
         ))}
