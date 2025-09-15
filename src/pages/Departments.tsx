@@ -71,7 +71,7 @@ export default function Departments() {
       </div>
 
       {/* Summary Stats */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
         <StatCard
           title="Jami bo'limlar"
           value={departments.length}
@@ -85,6 +85,11 @@ export default function Departments() {
         <StatCard
           title="Jami kompyuterlar"
           value={totalComputers}
+          icon={Monitor}
+        />
+        <StatCard
+          title="Jami telefonlar"
+          value={totalPhones}
           icon={Monitor}
         />
         <StatCard
