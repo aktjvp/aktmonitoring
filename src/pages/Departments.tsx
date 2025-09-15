@@ -296,110 +296,114 @@ export default function Departments() {
             <TableBody>
               {filteredDepartments.map((department) => (
                 <AccordionItem key={department.id} value={department.id.toString()} className="border-0">
-                  <AccordionTrigger asChild>
-                    <TableRow className="cursor-pointer hover:bg-muted/50">
-                      <TableCell>
-                        <div className="flex items-center gap-3">
+                  <TableRow>
+                    <TableCell>
+                      <AccordionTrigger className="hover:no-underline p-0 w-full">
+                        <div className="flex items-center gap-3 w-full">
                           <div className="p-2 bg-primary/10 rounded-lg">
                             <Building2 className="h-4 w-4 text-primary" />
                           </div>
-                          <div>
+                          <div className="text-left">
                             <p className="font-medium">{department.name}</p>
                             <p className="text-sm text-muted-foreground">{department.head}</p>
                           </div>
                         </div>
-                      </TableCell>
-                      <TableCell>
-                        <Badge variant="secondary" className="bg-blue-50 text-blue-700 border-blue-200">
-                          {department.employeeCount}
-                        </Badge>
-                      </TableCell>
-                      <TableCell>
-                        <Badge variant="secondary" className="bg-green-50 text-green-700 border-green-200">
-                          {department.computerCount}
-                        </Badge>
-                      </TableCell>
-                      <TableCell>
-                        <Badge variant="secondary" className="bg-purple-50 text-purple-700 border-purple-200">
-                          {department.phoneCount}
-                        </Badge>
-                      </TableCell>
-                      <TableCell>
-                        <Badge variant="secondary" className="bg-orange-50 text-orange-700 border-orange-200">
-                          {department.printerCount}
-                        </Badge>
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex gap-1">
-                          <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                            <Edit className="h-4 w-4" />
-                          </Button>
-                          <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
+                      </AccordionTrigger>
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant="secondary" className="bg-blue-50 text-blue-700 border-blue-200">
+                        {department.employeeCount}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant="secondary" className="bg-green-50 text-green-700 border-green-200">
+                        {department.computerCount}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant="secondary" className="bg-purple-50 text-purple-700 border-purple-200">
+                        {department.phoneCount}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant="secondary" className="bg-orange-50 text-orange-700 border-orange-200">
+                        {department.printerCount}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex gap-1">
+                        <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                        <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                  <AccordionContent>
+                    <TableRow>
+                      <TableCell colSpan={6} className="p-0">
+                        <div className="px-6 pb-6">
+                          <div className="bg-muted/30 rounded-lg p-6">
+                            <div className="flex items-center justify-between mb-4">
+                              <h4 className="font-semibold">Xodimlar ro'yxati</h4>
+                              <div className="relative">
+                                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                                <Input
+                                  placeholder="Xodimlar bo'yicha qidirish..."
+                                  value={employeeSearchTerm}
+                                  onChange={(e) => setEmployeeSearchTerm(e.target.value)}
+                                  className="pl-10 w-64"
+                                />
+                              </div>
+                            </div>
+                            
+                            <Table>
+                              <TableHeader>
+                                <TableRow>
+                                  <TableHead>F.I.O.</TableHead>
+                                  <TableHead>Lavozimi</TableHead>
+                                  <TableHead>Kompyuterlar</TableHead>
+                                  <TableHead>Telefonlar</TableHead>
+                                  <TableHead>Printerlar</TableHead>
+                                  <TableHead>Email</TableHead>
+                                </TableRow>
+                              </TableHeader>
+                              <TableBody>
+                                {department.employees
+                                  .filter(emp => 
+                                    emp.fullName.toLowerCase().includes(employeeSearchTerm.toLowerCase()) ||
+                                    emp.position.toLowerCase().includes(employeeSearchTerm.toLowerCase())
+                                  )
+                                  .map((employee) => (
+                                    <TableRow key={employee.id}>
+                                      <TableCell className="font-medium">{employee.fullName}</TableCell>
+                                      <TableCell>{employee.position}</TableCell>
+                                      <TableCell>
+                                        <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
+                                          {employee.computers}
+                                        </Badge>
+                                      </TableCell>
+                                      <TableCell>
+                                        <Badge variant="outline" className="bg-purple-50 text-purple-700 border-purple-200">
+                                          {employee.phones}
+                                        </Badge>
+                                      </TableCell>
+                                      <TableCell>
+                                        <Badge variant="outline" className="bg-orange-50 text-orange-700 border-orange-200">
+                                          {employee.printers}
+                                        </Badge>
+                                      </TableCell>
+                                      <TableCell className="text-muted-foreground">{employee.email}</TableCell>
+                                    </TableRow>
+                                  ))}
+                              </TableBody>
+                            </Table>
+                          </div>
                         </div>
                       </TableCell>
                     </TableRow>
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <div className="px-6 pb-6">
-                      <div className="bg-muted/30 rounded-lg p-6">
-                        <div className="flex items-center justify-between mb-4">
-                          <h4 className="font-semibold">Xodimlar ro'yxati</h4>
-                          <div className="relative">
-                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-                            <Input
-                              placeholder="Xodimlar bo'yicha qidirish..."
-                              value={employeeSearchTerm}
-                              onChange={(e) => setEmployeeSearchTerm(e.target.value)}
-                              className="pl-10 w-64"
-                            />
-                          </div>
-                        </div>
-                        
-                        <Table>
-                          <TableHeader>
-                            <TableRow>
-                              <TableHead>F.I.O.</TableHead>
-                              <TableHead>Lavozimi</TableHead>
-                              <TableHead>Kompyuterlar</TableHead>
-                              <TableHead>Telefonlar</TableHead>
-                              <TableHead>Printerlar</TableHead>
-                              <TableHead>Email</TableHead>
-                            </TableRow>
-                          </TableHeader>
-                          <TableBody>
-                            {department.employees
-                              .filter(emp => 
-                                emp.fullName.toLowerCase().includes(employeeSearchTerm.toLowerCase()) ||
-                                emp.position.toLowerCase().includes(employeeSearchTerm.toLowerCase())
-                              )
-                              .map((employee) => (
-                                <TableRow key={employee.id}>
-                                  <TableCell className="font-medium">{employee.fullName}</TableCell>
-                                  <TableCell>{employee.position}</TableCell>
-                                  <TableCell>
-                                    <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
-                                      {employee.computers}
-                                    </Badge>
-                                  </TableCell>
-                                  <TableCell>
-                                    <Badge variant="outline" className="bg-purple-50 text-purple-700 border-purple-200">
-                                      {employee.phones}
-                                    </Badge>
-                                  </TableCell>
-                                  <TableCell>
-                                    <Badge variant="outline" className="bg-orange-50 text-orange-700 border-orange-200">
-                                      {employee.printers}
-                                    </Badge>
-                                  </TableCell>
-                                  <TableCell className="text-muted-foreground">{employee.email}</TableCell>
-                                </TableRow>
-                              ))}
-                          </TableBody>
-                        </Table>
-                      </div>
-                    </div>
                   </AccordionContent>
                 </AccordionItem>
               ))}
