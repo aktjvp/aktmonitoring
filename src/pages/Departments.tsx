@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Building2, Users, Monitor, Plus, Edit, Trash2, Search, ArrowUpDown, Phone, Printer } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Building2, Users, Monitor, Plus, Edit, Trash2, Search, ArrowUpDown, Phone, Printer, X } from "lucide-react";
 import { StatCard } from "@/components/ui/stat-card";
 
 const departments = [
@@ -147,6 +147,7 @@ export default function Departments() {
   const [sortColumn, setSortColumn] = useState<string | null>(null);
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
   const [employeeSearchTerm, setEmployeeSearchTerm] = useState("");
+  const [selectedDepartment, setSelectedDepartment] = useState<typeof departments[0] | null>(null);
   
   const totalEmployees = departments.reduce((sum, dept) => sum + dept.employeeCount, 0);
   const totalComputers = departments.reduce((sum, dept) => sum + dept.computerCount, 0);
@@ -281,136 +282,178 @@ export default function Departments() {
 
       {/* Departments Table */}
       <Card>
-        <Accordion type="multiple" className="w-full">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <SortableHeader column="name">Bo'lim nomi</SortableHeader>
-                <SortableHeader column="employees">Xodimlar</SortableHeader>
-                <SortableHeader column="computers">Kompyuterlar</SortableHeader>
-                <SortableHeader column="phones">Telefonlar</SortableHeader>
-                <SortableHeader column="printers">Printerlar</SortableHeader>
-                <TableHead>Amallar</TableHead>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <SortableHeader column="name">Bo'lim nomi</SortableHeader>
+              <SortableHeader column="employees">Xodimlar</SortableHeader>
+              <SortableHeader column="computers">Kompyuterlar</SortableHeader>
+              <SortableHeader column="phones">Telefonlar</SortableHeader>
+              <SortableHeader column="printers">Printerlar</SortableHeader>
+              <TableHead>Amallar</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {filteredDepartments.map((department) => (
+              <TableRow key={department.id} className="cursor-pointer hover:bg-muted/50" onClick={() => setSelectedDepartment(department)}>
+                <TableCell>
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-primary/10 rounded-lg">
+                      <Building2 className="h-4 w-4 text-primary" />
+                    </div>
+                    <div>
+                      <p className="font-medium">{department.name}</p>
+                      <p className="text-sm text-muted-foreground">{department.head}</p>
+                    </div>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <Badge variant="secondary" className="bg-blue-50 text-blue-700 border-blue-200">
+                    {department.employeeCount}
+                  </Badge>
+                </TableCell>
+                <TableCell>
+                  <Badge variant="secondary" className="bg-green-50 text-green-700 border-green-200">
+                    {department.computerCount}
+                  </Badge>
+                </TableCell>
+                <TableCell>
+                  <Badge variant="secondary" className="bg-purple-50 text-purple-700 border-purple-200">
+                    {department.phoneCount}
+                  </Badge>
+                </TableCell>
+                <TableCell>
+                  <Badge variant="secondary" className="bg-orange-50 text-orange-700 border-orange-200">
+                    {department.printerCount}
+                  </Badge>
+                </TableCell>
+                <TableCell>
+                  <div className="flex gap-1">
+                    <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={(e) => e.stopPropagation()}>
+                      <Edit className="h-4 w-4" />
+                    </Button>
+                    <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={(e) => e.stopPropagation()}>
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </TableCell>
               </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filteredDepartments.map((department) => (
-                <AccordionItem key={department.id} value={department.id.toString()} className="border-0">
-                  <TableRow>
-                    <TableCell>
-                      <AccordionTrigger className="hover:no-underline p-0 w-full">
-                        <div className="flex items-center gap-3 w-full">
-                          <div className="p-2 bg-primary/10 rounded-lg">
-                            <Building2 className="h-4 w-4 text-primary" />
-                          </div>
-                          <div className="text-left">
-                            <p className="font-medium">{department.name}</p>
-                            <p className="text-sm text-muted-foreground">{department.head}</p>
-                          </div>
-                        </div>
-                      </AccordionTrigger>
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant="secondary" className="bg-blue-50 text-blue-700 border-blue-200">
-                        {department.employeeCount}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant="secondary" className="bg-green-50 text-green-700 border-green-200">
-                        {department.computerCount}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant="secondary" className="bg-purple-50 text-purple-700 border-purple-200">
-                        {department.phoneCount}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant="secondary" className="bg-orange-50 text-orange-700 border-orange-200">
-                        {department.printerCount}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex gap-1">
-                        <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                          <Edit className="h-4 w-4" />
-                        </Button>
-                        <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                  <AccordionContent>
-                    <TableRow>
-                      <TableCell colSpan={6} className="p-0">
-                        <div className="px-6 pb-6">
-                          <div className="bg-muted/30 rounded-lg p-6">
-                            <div className="flex items-center justify-between mb-4">
-                              <h4 className="font-semibold">Xodimlar ro'yxati</h4>
-                              <div className="relative">
-                                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-                                <Input
-                                  placeholder="Xodimlar bo'yicha qidirish..."
-                                  value={employeeSearchTerm}
-                                  onChange={(e) => setEmployeeSearchTerm(e.target.value)}
-                                  className="pl-10 w-64"
-                                />
-                              </div>
-                            </div>
-                            
-                            <Table>
-                              <TableHeader>
-                                <TableRow>
-                                  <TableHead>F.I.O.</TableHead>
-                                  <TableHead>Lavozimi</TableHead>
-                                  <TableHead>Kompyuterlar</TableHead>
-                                  <TableHead>Telefonlar</TableHead>
-                                  <TableHead>Printerlar</TableHead>
-                                  <TableHead>Email</TableHead>
-                                </TableRow>
-                              </TableHeader>
-                              <TableBody>
-                                {department.employees
-                                  .filter(emp => 
-                                    emp.fullName.toLowerCase().includes(employeeSearchTerm.toLowerCase()) ||
-                                    emp.position.toLowerCase().includes(employeeSearchTerm.toLowerCase())
-                                  )
-                                  .map((employee) => (
-                                    <TableRow key={employee.id}>
-                                      <TableCell className="font-medium">{employee.fullName}</TableCell>
-                                      <TableCell>{employee.position}</TableCell>
-                                      <TableCell>
-                                        <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
-                                          {employee.computers}
-                                        </Badge>
-                                      </TableCell>
-                                      <TableCell>
-                                        <Badge variant="outline" className="bg-purple-50 text-purple-700 border-purple-200">
-                                          {employee.phones}
-                                        </Badge>
-                                      </TableCell>
-                                      <TableCell>
-                                        <Badge variant="outline" className="bg-orange-50 text-orange-700 border-orange-200">
-                                          {employee.printers}
-                                        </Badge>
-                                      </TableCell>
-                                      <TableCell className="text-muted-foreground">{employee.email}</TableCell>
-                                    </TableRow>
-                                  ))}
-                              </TableBody>
-                            </Table>
-                          </div>
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </TableBody>
-          </Table>
-        </Accordion>
+            ))}
+          </TableBody>
+        </Table>
       </Card>
+
+      {/* Employee Details Dialog */}
+      <Dialog open={!!selectedDepartment} onOpenChange={() => setSelectedDepartment(null)}>
+        <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-3">
+              <div className="p-2 bg-primary/10 rounded-lg">
+                <Building2 className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <span>{selectedDepartment?.name}</span>
+                <p className="text-sm font-normal text-muted-foreground">{selectedDepartment?.head}</p>
+              </div>
+            </DialogTitle>
+          </DialogHeader>
+
+          {selectedDepartment && (
+            <div className="space-y-6">
+              {/* Department Summary */}
+              <div className="grid gap-4 md:grid-cols-4">
+                <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg">
+                  <Users className="h-5 w-5 text-blue-600" />
+                  <div>
+                    <p className="text-sm text-blue-600">Xodimlar</p>
+                    <p className="font-semibold text-blue-800">{selectedDepartment.employeeCount}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
+                  <Monitor className="h-5 w-5 text-green-600" />
+                  <div>
+                    <p className="text-sm text-green-600">Kompyuterlar</p>
+                    <p className="font-semibold text-green-800">{selectedDepartment.computerCount}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 p-3 bg-purple-50 rounded-lg">
+                  <Phone className="h-5 w-5 text-purple-600" />
+                  <div>
+                    <p className="text-sm text-purple-600">Telefonlar</p>
+                    <p className="font-semibold text-purple-800">{selectedDepartment.phoneCount}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 p-3 bg-orange-50 rounded-lg">
+                  <Printer className="h-5 w-5 text-orange-600" />
+                  <div>
+                    <p className="text-sm text-orange-600">Printerlar</p>
+                    <p className="font-semibold text-orange-800">{selectedDepartment.printerCount}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Employee Search */}
+              <div className="flex items-center justify-between">
+                <h4 className="text-lg font-semibold">Xodimlar ro'yxati</h4>
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                  <Input
+                    placeholder="Xodimlar bo'yicha qidirish..."
+                    value={employeeSearchTerm}
+                    onChange={(e) => setEmployeeSearchTerm(e.target.value)}
+                    className="pl-10 w-64"
+                  />
+                </div>
+              </div>
+
+              {/* Employees Table */}
+              <div className="border rounded-lg">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>F.I.O.</TableHead>
+                      <TableHead>Lavozimi</TableHead>
+                      <TableHead>Kompyuterlar</TableHead>
+                      <TableHead>Telefonlar</TableHead>
+                      <TableHead>Printerlar</TableHead>
+                      <TableHead>Email</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {selectedDepartment.employees
+                      .filter(emp => 
+                        emp.fullName.toLowerCase().includes(employeeSearchTerm.toLowerCase()) ||
+                        emp.position.toLowerCase().includes(employeeSearchTerm.toLowerCase())
+                      )
+                      .map((employee) => (
+                        <TableRow key={employee.id}>
+                          <TableCell className="font-medium">{employee.fullName}</TableCell>
+                          <TableCell>{employee.position}</TableCell>
+                          <TableCell>
+                            <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
+                              {employee.computers}
+                            </Badge>
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant="outline" className="bg-purple-50 text-purple-700 border-purple-200">
+                              {employee.phones}
+                            </Badge>
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant="outline" className="bg-orange-50 text-orange-700 border-orange-200">
+                              {employee.printers}
+                            </Badge>
+                          </TableCell>
+                          <TableCell className="text-muted-foreground">{employee.email}</TableCell>
+                        </TableRow>
+                      ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
