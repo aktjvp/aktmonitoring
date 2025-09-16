@@ -10,6 +10,7 @@ import AddEmployee from "./pages/AddEmployee";
 import Departments from "./pages/Departments";
 import AddDepartment from "./pages/AddDepartment";
 import Computers from "./pages/Computers";
+import AddComputer from "./pages/AddComputer";
 import Phones from "./pages/Phones";
 import Printers from "./pages/Printers";
 import Serverxonalar from "./pages/Serverxonalar";
@@ -32,6 +33,7 @@ const App = () => (
             <Route path="departments" element={<Departments />} />
             <Route path="departments/add" element={<AddDepartment />} />
             <Route path="computers" element={<Computers />} />
+            <Route path="computers/add" element={<AddComputer />} />
             <Route path="phones" element={<Phones />} />
             <Route path="printers" element={<Printers />} />
             <Route path="serverxonalar" element={<Serverxonalar />} />
