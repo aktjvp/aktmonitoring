@@ -19,6 +19,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Plus, Search, Filter, Edit, Eye, Monitor } from "lucide-react";
+import { Link } from "react-router-dom";
 
 // Mock data
 const computers = [
@@ -115,9 +116,11 @@ export default function Computers() {
             Tashkilotdagi barcha kompyuterlar ro'yxati va ularning texnik ma'lumotlari
           </p>
         </div>
-        <Button className="bg-primary hover:bg-primary/90">
-          <Plus className="mr-2 h-4 w-4" />
-          Yangi kompyuter qo'shish
+        <Button asChild className="bg-primary hover:bg-primary/90">
+          <Link to="/computers/add">
+            <Plus className="mr-2 h-4 w-4" />
+            Yangi kompyuter qo'shish
+          </Link>
         </Button>
       </div>
 

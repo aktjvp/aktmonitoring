@@ -12,7 +12,9 @@ import AddDepartment from "./pages/AddDepartment";
 import Computers from "./pages/Computers";
 import AddComputer from "./pages/AddComputer";
 import Phones from "./pages/Phones";
+import AddPhone from "./pages/AddPhone";
 import Printers from "./pages/Printers";
+import AddPrinter from "./pages/AddPrinter";
 import Serverxonalar from "./pages/Serverxonalar";
 import Turniketlar from "./pages/Turniketlar";
 import NotFound from "./pages/NotFound";
@@ -35,7 +37,9 @@ const App = () => (
             <Route path="computers" element={<Computers />} />
             <Route path="computers/add" element={<AddComputer />} />
             <Route path="phones" element={<Phones />} />
+            <Route path="phones/add" element={<AddPhone />} />
             <Route path="printers" element={<Printers />} />
+            <Route path="printers/add" element={<AddPrinter />} />
             <Route path="serverxonalar" element={<Serverxonalar />} />
             <Route path="turniketlar" element={<Turniketlar />} />
             <Route path="reports" element={<Dashboard />} />
