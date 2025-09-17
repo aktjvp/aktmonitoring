@@ -26,68 +26,202 @@ const computers = [
   {
     id: 1,
     name: "IT-DESK-001",
-    type: "Desktop",
     model: "HP EliteDesk 800",
+    type: "Desktop",
+    macAddress: "00:1B:44:11:3A:B7",
+    purchaseDate: "15.03.2023",
+    monitorSize: "24.0\"",
     processor: "Intel Core i5-10400",
     ram: "8GB",
-    macAddress: "00:1B:44:11:3A:B7",
-    ssd: { available: true, serial: "SSD123456", asCDrive: true },
-    hdd: { available: false, serial: "" },
-    ups: { available: true, status: "Ishlayapti" },
-    domain: true,
-    antivirus: "Kaspersky 21.0",
-    internet: true,
-    chrome: "120.0.6099.109",
-    owner: "Karimov Sardor",
-    department: "IT Bo'limi",
-    biosPassword: true,
-    userPassword: true,
+    upsStatus: "Bor",
+    ssd: { available: true, capacity: "256GB", serial: "SSD123456" },
+    hdd: { available: false, capacity: "", serial: "" },
+    isDomainJoined: true,
+    antivirusName: "Kaspersky Endpoint Security",
+    antivirusUpdateDate: "20.12.2024",
+    hasInternet: true,
+    browserModel: "Chrome 120.0.6099.109",
+    hasBiosPassword: true,
+    hasUserPassword: true,
     seal: { available: true, number: "SEAL001" },
-    usbOpen: false,
+    usbPortStatus: "Yopiq",
+    user: "Karimov Sardor",
+    department: "IT Bo'limi",
   },
   {
     id: 2,
     name: "FIN-LAP-002",
+    model: "Dell Latitude 5520",
     type: "Laptop",
-    model: "Dell OptiPlex 3070",
+    macAddress: "00:1B:44:11:3A:B8",
+    purchaseDate: "08.06.2023",
+    monitorSize: "15.6\"",
     processor: "Intel Core i3-8100",
     ram: "4GB",
-    macAddress: "00:1B:44:11:3A:B8",
-    ssd: { available: false, serial: "", asCDrive: false },
-    hdd: { available: true, serial: "HDD789012" },
-    ups: { available: false, status: "Yo'q" },
-    domain: true,
-    antivirus: "Avast 23.1",
-    internet: false,
-    chrome: "119.0.6045.160",
-    owner: "Rahimova Nozima",
-    department: "Moliya Bo'limi",
-    biosPassword: false,
-    userPassword: true,
+    upsStatus: "Yo'q",
+    ssd: { available: false, capacity: "", serial: "" },
+    hdd: { available: true, capacity: "500GB", serial: "HDD789012" },
+    isDomainJoined: true,
+    antivirusName: "Avast Business",
+    antivirusUpdateDate: "18.12.2024",
+    hasInternet: false,
+    browserModel: "Chrome 119.0.6045.160",
+    hasBiosPassword: false,
+    hasUserPassword: true,
     seal: { available: false, number: "" },
-    usbOpen: true,
+    usbPortStatus: "Ochiq",
+    user: "Rahimova Nozima",
+    department: "Moliya Bo'limi",
   },
   {
     id: 3,
     name: "HR-MONO-003",
-    type: "Monoblock",
     model: "Lenovo ThinkCentre M720",
+    type: "Monoblok",
+    macAddress: "00:1B:44:11:3A:B9",
+    purchaseDate: "22.09.2023",
+    monitorSize: "21.5\"",
     processor: "AMD Ryzen 5 3400G",
     ram: "16GB",
-    macAddress: "00:1B:44:11:3A:B9",
-    ssd: { available: true, serial: "SSD345678", asCDrive: true },
-    hdd: { available: true, serial: "HDD901234" },
-    ups: { available: true, status: "Nosoz" },
-    domain: false,
-    antivirus: "",
-    internet: true,
-    chrome: "118.0.5993.117",
-    owner: "Toshmatov Bobur",
-    department: "HR Bo'limi",
-    biosPassword: true,
-    userPassword: false,
+    upsStatus: "Bor nosoz",
+    ssd: { available: true, capacity: "512GB", serial: "SSD345678" },
+    hdd: { available: true, capacity: "1TB", serial: "HDD901234" },
+    isDomainJoined: false,
+    antivirusName: "",
+    antivirusUpdateDate: "",
+    hasInternet: true,
+    browserModel: "Chrome 118.0.5993.117",
+    hasBiosPassword: true,
+    hasUserPassword: false,
     seal: { available: true, number: "SEAL003" },
-    usbOpen: true,
+    usbPortStatus: "Ochiq",
+    user: "Toshmatov Bobur",
+    department: "HR Bo'limi",
+  },
+  {
+    id: 4,
+    name: "ACC-DESK-004",
+    model: "ASUS ExpertCenter D500",
+    type: "Desktop",
+    macAddress: "00:1B:44:11:3A:C0",
+    purchaseDate: "10.01.2024",
+    monitorSize: "27.0\"",
+    processor: "Intel Core i7-11700",
+    ram: "32GB",
+    upsStatus: "Bor",
+    ssd: { available: true, capacity: "1TB", serial: "SSD567890" },
+    hdd: { available: false, capacity: "", serial: "" },
+    isDomainJoined: true,
+    antivirusName: "ESET Endpoint Protection",
+    antivirusUpdateDate: "21.12.2024",
+    hasInternet: true,
+    browserModel: "Chrome 121.0.6167.139",
+    hasBiosPassword: true,
+    hasUserPassword: true,
+    seal: { available: true, number: "SEAL004" },
+    usbPortStatus: "Yopiq",
+    user: "Abdullayev Aziz",
+    department: "Buxgalteriya",
+  },
+  {
+    id: 5,
+    name: "SEC-LAP-005",
+    model: "HP ProBook 450",
+    type: "Laptop",
+    macAddress: "00:1B:44:11:3A:C1",
+    purchaseDate: "05.11.2023",
+    monitorSize: "14.0\"",
+    processor: "Intel Core i5-1135G7",
+    ram: "8GB",
+    upsStatus: "Yo'q",
+    ssd: { available: true, capacity: "256GB", serial: "SSD234567" },
+    hdd: { available: false, capacity: "", serial: "" },
+    isDomainJoined: true,
+    antivirusName: "Windows Defender",
+    antivirusUpdateDate: "22.12.2024",
+    hasInternet: true,
+    browserModel: "Chrome 120.0.6099.199",
+    hasBiosPassword: true,
+    hasUserPassword: true,
+    seal: { available: false, number: "" },
+    usbPortStatus: "Yopiq",
+    user: "Mirzayeva Dilnoza",
+    department: "Xavfsizlik Bo'limi",
+  },
+  {
+    id: 6,
+    name: "ADM-MONO-006",
+    model: "Acer Aspire C24",
+    type: "Monoblok",
+    macAddress: "00:1B:44:11:3A:C2",
+    purchaseDate: "18.04.2023",
+    monitorSize: "23.8\"",
+    processor: "Intel Core i3-10110U",
+    ram: "4GB",
+    upsStatus: "Bor",
+    ssd: { available: false, capacity: "", serial: "" },
+    hdd: { available: true, capacity: "1TB", serial: "HDD456789" },
+    isDomainJoined: false,
+    antivirusName: "Avira Antivirus",
+    antivirusUpdateDate: "19.12.2024",
+    hasInternet: false,
+    browserModel: "Chrome 119.0.6045.199",
+    hasBiosPassword: false,
+    hasUserPassword: true,
+    seal: { available: true, number: "SEAL006" },
+    usbPortStatus: "Ochiq",
+    user: "Karimova Feruza",
+    department: "Ma'muriyat",
+  },
+  {
+    id: 7,
+    name: "LOG-DESK-007",
+    model: "MSI Pro B660M",
+    type: "Desktop",
+    macAddress: "00:1B:44:11:3A:C3",
+    purchaseDate: "29.08.2024",
+    monitorSize: "32.0\"",
+    processor: "Intel Core i9-12900K",
+    ram: "64GB",
+    upsStatus: "Bor",
+    ssd: { available: true, capacity: "2TB", serial: "SSD789012" },
+    hdd: { available: true, capacity: "4TB", serial: "HDD123456" },
+    isDomainJoined: true,
+    antivirusName: "McAfee Total Protection",
+    antivirusUpdateDate: "23.12.2024",
+    hasInternet: true,
+    browserModel: "Chrome 121.0.6167.184",
+    hasBiosPassword: true,
+    hasUserPassword: true,
+    seal: { available: true, number: "SEAL007" },
+    usbPortStatus: "Yopiq",
+    user: "Sattorov Jahongir",
+    department: "Logistika Bo'limi",
+  },
+  {
+    id: 8,
+    name: "CONS-LAP-008",
+    model: "Lenovo IdeaPad 3",
+    type: "Laptop",
+    macAddress: "00:1B:44:11:3A:C4",
+    purchaseDate: "12.07.2024",
+    monitorSize: "17.3\"",
+    processor: "AMD Ryzen 7 5700U",
+    ram: "12GB",
+    upsStatus: "Yo'q",
+    ssd: { available: true, capacity: "512GB", serial: "SSD890123" },
+    hdd: { available: false, capacity: "", serial: "" },
+    isDomainJoined: false,
+    antivirusName: "Bitdefender GravityZone",
+    antivirusUpdateDate: "21.12.2024",
+    hasInternet: true,
+    browserModel: "Chrome 120.0.6099.234",
+    hasBiosPassword: false,
+    hasUserPassword: false,
+    seal: { available: false, number: "" },
+    usbPortStatus: "Ochiq",
+    user: "Yusupova Kamila",
+    department: "Konsalting Bo'limi",
   },
 ];
 
@@ -101,7 +235,7 @@ export default function Computers() {
       computer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       computer.model.toLowerCase().includes(searchTerm.toLowerCase()) ||
       computer.macAddress.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      computer.owner.toLowerCase().includes(searchTerm.toLowerCase());
+      computer.user.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesType = selectedType === "all" || computer.type === selectedType;
     const matchesDepartment = selectedDepartment === "all" || computer.department === selectedDepartment;
     return matchesSearch && matchesType && matchesDepartment;
@@ -151,7 +285,7 @@ export default function Computers() {
                 <SelectItem value="all">Barcha turlar</SelectItem>
                 <SelectItem value="Desktop">Desktop</SelectItem>
                 <SelectItem value="Laptop">Laptop</SelectItem>
-                <SelectItem value="Monoblock">Monoblock</SelectItem>
+                <SelectItem value="Monoblok">Monoblok</SelectItem>
               </SelectContent>
             </Select>
             <Select value={selectedDepartment} onValueChange={setSelectedDepartment}>
@@ -163,6 +297,11 @@ export default function Computers() {
                 <SelectItem value="IT Bo'limi">IT Bo'limi</SelectItem>
                 <SelectItem value="Moliya Bo'limi">Moliya Bo'limi</SelectItem>
                 <SelectItem value="HR Bo'limi">HR Bo'limi</SelectItem>
+                <SelectItem value="Buxgalteriya">Buxgalteriya</SelectItem>
+                <SelectItem value="Xavfsizlik Bo'limi">Xavfsizlik Bo'limi</SelectItem>
+                <SelectItem value="Ma'muriyat">Ma'muriyat</SelectItem>
+                <SelectItem value="Logistika Bo'limi">Logistika Bo'limi</SelectItem>
+                <SelectItem value="Konsalting Bo'limi">Konsalting Bo'limi</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -187,7 +326,7 @@ export default function Computers() {
                   <TableHead>Xotira qurilmalari</TableHead>
                   <TableHead>Tizim va dasturlar</TableHead>
                   <TableHead>Xavfsizlik</TableHead>
-                  <TableHead>Egasi</TableHead>
+                  <TableHead>Foydalanuvchi</TableHead>
                   <TableHead>Harakatlar</TableHead>
                 </TableRow>
               </TableHeader>
@@ -204,15 +343,25 @@ export default function Computers() {
                         <div className="text-xs text-muted-foreground font-mono">
                           MAC: {computer.macAddress}
                         </div>
+                        <div className="text-xs text-muted-foreground">
+                          Olingan: {computer.purchaseDate}
+                        </div>
                       </div>
                     </TableCell>
                     <TableCell>
                       <div className="text-sm space-y-1">
+                        <div><strong>Monitor:</strong> {computer.monitorSize}</div>
                         <div><strong>Protsessor:</strong> {computer.processor}</div>
                         <div><strong>RAM:</strong> {computer.ram}</div>
                         <div className="flex items-center gap-1">
-                          <Badge variant={computer.ups.available ? "default" : "outline"} className="text-xs">
-                            UPS: {computer.ups.status}
+                          <Badge 
+                            variant={
+                              computer.upsStatus === "Bor" ? "default" : 
+                              computer.upsStatus === "Bor nosoz" ? "destructive" : "outline"
+                            } 
+                            className="text-xs"
+                          >
+                            UPS: {computer.upsStatus}
                           </Badge>
                         </div>
                       </div>
@@ -224,52 +373,64 @@ export default function Computers() {
                             variant={computer.ssd.available ? "default" : "outline"} 
                             className="text-xs w-fit"
                           >
-                            {computer.ssd.available ? `SSD: ${computer.ssd.serial}` : "SSD yo'q"}
+                            {computer.ssd.available ? `SSD: ${computer.ssd.capacity}` : "SSD yo'q"}
                           </Badge>
-                          {computer.ssd.available && computer.ssd.asCDrive && (
-                            <span className="text-xs text-green-600">C: disk sifatida</span>
+                          {computer.ssd.available && (
+                            <span className="text-xs text-muted-foreground">
+                              Serial: {computer.ssd.serial}
+                            </span>
                           )}
                         </div>
-                        <div>
+                        <div className="flex flex-col gap-1">
                           <Badge 
                             variant={computer.hdd.available ? "default" : "outline"} 
                             className="text-xs w-fit"
                           >
-                            {computer.hdd.available ? `HDD: ${computer.hdd.serial}` : "HDD yo'q"}
+                            {computer.hdd.available ? `HDD: ${computer.hdd.capacity}` : "HDD yo'q"}
                           </Badge>
+                          {computer.hdd.available && (
+                            <span className="text-xs text-muted-foreground">
+                              Serial: {computer.hdd.serial}
+                            </span>
+                          )}
                         </div>
                       </div>
                     </TableCell>
                     <TableCell>
                       <div className="space-y-1">
                         <Badge 
-                          variant={computer.domain ? "default" : "outline"}
+                          variant={computer.isDomainJoined ? "default" : "outline"}
                           className="text-xs w-fit"
                         >
-                          Domen {computer.domain ? "+" : "-"}
+                          Domen {computer.isDomainJoined ? "+" : "-"}
                         </Badge>
                         <div className="text-xs">
-                          <strong>Antivirus:</strong> {computer.antivirus || "Yo'q"}
+                          <strong>Antivirus:</strong> {computer.antivirusName || "Yo'q"}
                         </div>
+                        {computer.antivirusUpdateDate && (
+                          <div className="text-xs text-muted-foreground">
+                            Yangilangan: {computer.antivirusUpdateDate}
+                          </div>
+                        )}
                         <Badge 
-                          variant={computer.internet ? "default" : "secondary"}
+                          variant={computer.hasInternet ? "default" : "secondary"}
                           className="text-xs w-fit"
                         >
-                          Internet {computer.internet ? "+" : "-"}
+                          Internet {computer.hasInternet ? "+" : "-"}
                         </Badge>
                         <div className="text-xs">
-                          <strong>Chrome:</strong> {computer.chrome}
+                          <strong>Browser:</strong> {computer.browserModel}
                         </div>
                       </div>
                     </TableCell>
                     <TableCell>
                       <div className="space-y-1">
                         <div className="flex gap-1">
-                          <Badge variant={computer.biosPassword ? "default" : "outline"} className="text-xs">
-                            BIOS {computer.biosPassword ? "+" : "-"}
+                          <Badge variant={computer.hasBiosPassword ? "default" : "outline"} className="text-xs">
+                            BIOS {computer.hasBiosPassword ? "+" : "-"}
                           </Badge>
-                          <Badge variant={computer.userPassword ? "default" : "outline"} className="text-xs">
-                            User {computer.userPassword ? "+" : "-"}
+                          <Badge variant={computer.hasUserPassword ? "default" : "outline"} className="text-xs">
+                            User {computer.hasUserPassword ? "+" : "-"}
                           </Badge>
                         </div>
                         <Badge 
@@ -279,16 +440,16 @@ export default function Computers() {
                           Plomba {computer.seal.available ? computer.seal.number : "-"}
                         </Badge>
                         <Badge 
-                          variant={computer.usbOpen ? "destructive" : "default"} 
+                          variant={computer.usbPortStatus === "Ochiq" ? "destructive" : "default"} 
                           className="text-xs w-fit"
                         >
-                          USB {computer.usbOpen ? "Ochiq" : "Yopiq"}
+                          USB {computer.usbPortStatus}
                         </Badge>
                       </div>
                     </TableCell>
                     <TableCell>
                       <div className="text-sm">
-                        <div className="font-medium">{computer.owner}</div>
+                        <div className="font-medium">{computer.user}</div>
                         <div className="text-muted-foreground">{computer.department}</div>
                       </div>
                     </TableCell>
