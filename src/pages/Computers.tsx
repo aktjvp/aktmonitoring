@@ -258,6 +258,125 @@ export default function Computers() {
         </Button>
       </div>
 
+      {/* Statistics Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+        <Card className="shadow-soft">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">Jami kompyuterlar</p>
+                <div className="flex items-baseline gap-2">
+                  <p className="text-2xl font-bold">{computers.length}</p>
+                  <div className="text-xs text-muted-foreground">
+                    <span className="text-green-600">{computers.filter(c => c.upsStatus !== "Bor nosoz").length} soz</span>
+                    <span className="mx-1">•</span>
+                    <span className="text-red-600">{computers.filter(c => c.upsStatus === "Bor nosoz").length} nosoz</span>
+                  </div>
+                </div>
+              </div>
+              <Monitor className="h-8 w-8 text-muted-foreground" />
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="shadow-soft">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">Domen qo'shilgan</p>
+                <p className="text-2xl font-bold text-green-600">
+                  {computers.filter(c => c.isDomainJoined).length}
+                </p>
+                <p className="text-xs text-muted-foreground">Active Directory</p>
+              </div>
+              <div className="h-8 w-8 rounded-full bg-green-100 flex items-center justify-center">
+                <div className="h-3 w-3 rounded-full bg-green-600"></div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="shadow-soft">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">Internet ulangan</p>
+                <p className="text-2xl font-bold text-blue-600">
+                  {computers.filter(c => c.hasInternet).length}
+                </p>
+                <p className="text-xs text-muted-foreground">Tarmoq mavjud</p>
+              </div>
+              <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
+                <div className="h-3 w-3 rounded-full bg-blue-600"></div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="shadow-soft">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">Antivirus</p>
+                <div className="flex items-baseline gap-2">
+                  <p className="text-2xl font-bold">{computers.filter(c => c.antivirusName).length}</p>
+                  <div className="text-xs text-muted-foreground">
+                    <span className="text-green-600">{computers.filter(c => c.antivirusName).length} o'rnatilgan</span>
+                    <span className="mx-1">•</span>
+                    <span className="text-red-600">{computers.filter(c => !c.antivirusName).length} yo'q</span>
+                  </div>
+                </div>
+              </div>
+              <div className="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center">
+                <div className="h-3 w-3 rounded-full bg-purple-600"></div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="shadow-soft">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">USB portlar</p>
+                <div className="flex items-baseline gap-2">
+                  <p className="text-2xl font-bold">{computers.filter(c => c.usbPortStatus === "Ochiq").length}</p>
+                  <div className="text-xs text-muted-foreground">
+                    <span className="text-red-600">{computers.filter(c => c.usbPortStatus === "Ochiq").length} ochiq</span>
+                    <span className="mx-1">•</span>
+                    <span className="text-green-600">{computers.filter(c => c.usbPortStatus === "Yopiq").length} yopiq</span>
+                  </div>
+                </div>
+              </div>
+              <div className="h-8 w-8 rounded-full bg-orange-100 flex items-center justify-center">
+                <div className="h-3 w-3 rounded-full bg-orange-600"></div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="shadow-soft">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">Obmordagi kompyuterlar</p>
+                <div className="flex items-baseline gap-2">
+                  <p className="text-2xl font-bold">{computers.filter(c => c.macAddress.startsWith("00:1B:44")).length}</p>
+                  <div className="text-xs text-muted-foreground">
+                    <span className="text-green-600">{computers.filter(c => c.macAddress.startsWith("00:1B:44") && c.upsStatus !== "Bor nosoz").length} soz</span>
+                    <span className="mx-1">•</span>
+                    <span className="text-red-600">{computers.filter(c => c.macAddress.startsWith("00:1B:44") && c.upsStatus === "Bor nosoz").length} nosoz</span>
+                  </div>
+                </div>
+              </div>
+              <div className="h-8 w-8 rounded-full bg-cyan-100 flex items-center justify-center">
+                <div className="h-3 w-3 rounded-full bg-cyan-600"></div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
       {/* Filters */}
       <Card className="shadow-soft">
         <CardHeader>

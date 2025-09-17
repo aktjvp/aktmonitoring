@@ -198,41 +198,39 @@ export default function Printers() {
       </div>
 
       {/* Statistics Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card className="shadow-soft">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Jami printerlar</p>
-                <p className="text-2xl font-bold">{printers.length}</p>
+                <div className="flex items-baseline gap-2">
+                  <p className="text-2xl font-bold">{printers.length}</p>
+                  <div className="text-xs text-muted-foreground">
+                    <span className="text-green-600">{printers.filter(p => p.technicalCondition).length} soz</span>
+                    <span className="mx-1">•</span>
+                    <span className="text-red-600">{printers.filter(p => !p.technicalCondition).length} nosoz</span>
+                  </div>
+                </div>
               </div>
               <Printer className="h-8 w-8 text-muted-foreground" />
             </div>
           </CardContent>
         </Card>
+        
         <Card className="shadow-soft">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Soz</p>
-                <p className="text-2xl font-bold text-green-600">
-                  {printers.filter(p => p.technicalCondition).length}
-                </p>
-              </div>
-              <div className="h-8 w-8 rounded-full bg-green-100 flex items-center justify-center">
-                <div className="h-3 w-3 rounded-full bg-green-600"></div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="shadow-soft">
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-muted-foreground">Tashkilot mulki</p>
-                <p className="text-2xl font-bold">
-                  {printers.filter(p => p.acquisitionType === "organization").length}
-                </p>
+                <p className="text-sm font-medium text-muted-foreground">Tashkilot printerlari</p>
+                <div className="flex items-baseline gap-2">
+                  <p className="text-2xl font-bold">{printers.filter(p => p.acquisitionType === "organization").length}</p>
+                  <div className="text-xs text-muted-foreground">
+                    <span className="text-green-600">{printers.filter(p => p.acquisitionType === "organization" && p.technicalCondition).length} soz</span>
+                    <span className="mx-1">•</span>
+                    <span className="text-red-600">{printers.filter(p => p.acquisitionType === "organization" && !p.technicalCondition).length} nosoz</span>
+                  </div>
+                </div>
               </div>
               <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
                 <div className="h-3 w-3 rounded-full bg-blue-600"></div>
@@ -240,17 +238,44 @@ export default function Printers() {
             </div>
           </CardContent>
         </Card>
+
         <Card className="shadow-soft">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Ethernet ulanish</p>
-                <p className="text-2xl font-bold">
-                  {printers.filter(p => p.connectionType === "Ethernet").length}
-                </p>
+                <p className="text-sm font-medium text-muted-foreground">Shaxsiy printerlar</p>
+                <div className="flex items-baseline gap-2">
+                  <p className="text-2xl font-bold">{printers.filter(p => p.acquisitionType === "personal").length}</p>
+                  <div className="text-xs text-muted-foreground">
+                    <span className="text-green-600">{printers.filter(p => p.acquisitionType === "personal" && p.technicalCondition).length} soz</span>
+                    <span className="mx-1">•</span>
+                    <span className="text-red-600">{printers.filter(p => p.acquisitionType === "personal" && !p.technicalCondition).length} nosoz</span>
+                  </div>
+                </div>
               </div>
               <div className="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center">
                 <div className="h-3 w-3 rounded-full bg-purple-600"></div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="shadow-soft">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">Obmordagi printerlar</p>
+                <div className="flex items-baseline gap-2">
+                  <p className="text-2xl font-bold">{printers.filter(p => p.connectedComputer === "Tarmoq").length}</p>
+                  <div className="text-xs text-muted-foreground">
+                    <span className="text-green-600">{printers.filter(p => p.connectedComputer === "Tarmoq" && p.technicalCondition).length} soz</span>
+                    <span className="mx-1">•</span>
+                    <span className="text-red-600">{printers.filter(p => p.connectedComputer === "Tarmoq" && !p.technicalCondition).length} nosoz</span>
+                  </div>
+                </div>
+              </div>
+              <div className="h-8 w-8 rounded-full bg-orange-100 flex items-center justify-center">
+                <div className="h-3 w-3 rounded-full bg-orange-600"></div>
               </div>
             </div>
           </CardContent>

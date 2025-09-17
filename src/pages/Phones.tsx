@@ -182,26 +182,35 @@ export default function Phones() {
       </div>
 
       {/* Statistics Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card className="shadow-soft">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Jami telefonlar</p>
-                <p className="text-2xl font-bold">{phones.length}</p>
+                <div className="flex items-baseline gap-2">
+                  <p className="text-2xl font-bold">{phones.length}</p>
+                  <div className="text-xs text-muted-foreground">
+                    <span className="text-green-600">{phones.filter(p => p.technicalCondition).length} soz</span>
+                    <span className="mx-1">•</span>
+                    <span className="text-red-600">{phones.filter(p => !p.technicalCondition).length} nosoz</span>
+                  </div>
+                </div>
               </div>
               <Smartphone className="h-8 w-8 text-muted-foreground" />
             </div>
           </CardContent>
         </Card>
+
         <Card className="shadow-soft">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Faol</p>
+                <p className="text-sm font-medium text-muted-foreground">Faol telefonlar</p>
                 <p className="text-2xl font-bold text-green-600">
                   {phones.filter(p => p.workingStatus && p.technicalCondition).length}
                 </p>
+                <p className="text-xs text-muted-foreground">Tarmoqqa ulangan</p>
               </div>
               <div className="h-8 w-8 rounded-full bg-green-100 flex items-center justify-center">
                 <div className="h-3 w-3 rounded-full bg-green-600"></div>
@@ -209,14 +218,16 @@ export default function Phones() {
             </div>
           </CardContent>
         </Card>
+
         <Card className="shadow-soft">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Nosoz</p>
+                <p className="text-sm font-medium text-muted-foreground">Tarmoqdan uzilgan</p>
                 <p className="text-2xl font-bold text-yellow-600">
-                  {phones.filter(p => !p.technicalCondition).length}
+                  {phones.filter(p => !p.workingStatus && p.technicalCondition).length}
                 </p>
+                <p className="text-xs text-muted-foreground">Soz lekin faol emas</p>
               </div>
               <div className="h-8 w-8 rounded-full bg-yellow-100 flex items-center justify-center">
                 <div className="h-3 w-3 rounded-full bg-yellow-600"></div>
@@ -224,12 +235,20 @@ export default function Phones() {
             </div>
           </CardContent>
         </Card>
+
         <Card className="shadow-soft">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">IP manzillar</p>
-                <p className="text-2xl font-bold">{phones.filter(p => p.ipAddress).length}</p>
+                <p className="text-sm font-medium text-muted-foreground">Obmordagi telefonlar</p>
+                <div className="flex items-baseline gap-2">
+                  <p className="text-2xl font-bold">{phones.filter(p => p.ipAddress.startsWith("192.168.")).length}</p>
+                  <div className="text-xs text-muted-foreground">
+                    <span className="text-green-600">{phones.filter(p => p.ipAddress.startsWith("192.168.") && p.technicalCondition).length} soz</span>
+                    <span className="mx-1">•</span>
+                    <span className="text-red-600">{phones.filter(p => p.ipAddress.startsWith("192.168.") && !p.technicalCondition).length} nosoz</span>
+                  </div>
+                </div>
               </div>
               <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
                 <div className="h-3 w-3 rounded-full bg-blue-600"></div>
