@@ -238,6 +238,32 @@ export default function Reports() {
                         </TableCell>
                       </TableRow>
                     ))}
+                    <TableRow className="bg-muted/50 font-medium">
+                      <TableCell className="font-bold">-</TableCell>
+                      <TableCell className="font-bold">Umumiy summa</TableCell>
+                      <TableCell>
+                        <div className="space-y-1">
+                          <div>Tezkor: <Badge variant="secondary">{departmentData.reduce((sum, item) => sum + item.employees.tezkor, 0)}</Badge></div>
+                          <div>Texnik: <Badge variant="outline">{departmentData.reduce((sum, item) => sum + item.employees.texnik, 0)}</Badge></div>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <div className="space-y-1">
+                          <div>Desktop: <Badge variant="secondary">{departmentData.reduce((sum, item) => sum + item.computers.desktop, 0)}</Badge></div>
+                          <div>Monoblock: <Badge variant="outline">{departmentData.reduce((sum, item) => sum + item.computers.monoblock, 0)}</Badge></div>
+                          <div>Laptop: <Badge variant="secondary">{departmentData.reduce((sum, item) => sum + item.computers.laptop, 0)}</Badge></div>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <Badge variant="default">{departmentData.reduce((sum, item) => sum + item.ups, 0)}</Badge>
+                      </TableCell>
+                      <TableCell>
+                        <Badge variant="default">{departmentData.reduce((sum, item) => sum + item.phones, 0)}</Badge>
+                      </TableCell>
+                      <TableCell>
+                        <Badge variant="default">{departmentData.reduce((sum, item) => sum + item.printers, 0)}</Badge>
+                      </TableCell>
+                    </TableRow>
                   </TableBody>
                 </Table>
               </div>
@@ -321,6 +347,61 @@ export default function Reports() {
                         </TableCell>
                       </TableRow>
                     ))}
+                    <TableRow className="bg-muted/50 font-medium">
+                      <TableCell className="font-bold">Umumiy summa</TableCell>
+                      <TableCell>
+                        <div className="space-y-1">
+                          <div>Soz: <Badge variant="secondary">{computerData.reduce((sum, item) => sum + item.total.soz, 0)}</Badge></div>
+                          <div>Nosoz: <Badge variant="destructive">{computerData.reduce((sum, item) => sum + item.total.nosoz, 0)}</Badge></div>
+                        </div>
+                      </TableCell>
+                      <TableCell><Badge variant="default">{computerData.reduce((sum, item) => sum + item.inUse, 0)}</Badge></TableCell>
+                      <TableCell><Badge variant="default">{computerData.reduce((sum, item) => sum + item.domainJoined, 0)}</Badge></TableCell>
+                      <TableCell><Badge variant="default">{computerData.reduce((sum, item) => sum + item.internetConnected, 0)}</Badge></TableCell>
+                      <TableCell>
+                        <div className="space-y-1">
+                          <div>Bor: <Badge variant="secondary">{computerData.reduce((sum, item) => sum + item.antivirus.bor, 0)}</Badge></div>
+                          <div>Yo'q: <Badge variant="destructive">{computerData.reduce((sum, item) => sum + item.antivirus.yoq, 0)}</Badge></div>
+                        </div>
+                      </TableCell>
+                      <TableCell><Badge variant="outline">-</Badge></TableCell>
+                      <TableCell>
+                        <div className="space-y-1">
+                          <div>Bor: <Badge variant="secondary">{computerData.reduce((sum, item) => sum + item.biosPassword.bor, 0)}</Badge></div>
+                          <div>Yo'q: <Badge variant="destructive">{computerData.reduce((sum, item) => sum + item.biosPassword.yoq, 0)}</Badge></div>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <div className="space-y-1">
+                          <div>Bor: <Badge variant="secondary">{computerData.reduce((sum, item) => sum + item.userPassword.bor, 0)}</Badge></div>
+                          <div>Yo'q: <Badge variant="destructive">{computerData.reduce((sum, item) => sum + item.userPassword.yoq, 0)}</Badge></div>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <div className="space-y-1">
+                          <div>Bor: <Badge variant="secondary">{computerData.reduce((sum, item) => sum + item.seal.bor, 0)}</Badge></div>
+                          <div>Yo'q: <Badge variant="destructive">{computerData.reduce((sum, item) => sum + item.seal.yoq, 0)}</Badge></div>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <div className="space-y-1">
+                          <div>Ochiq: <Badge variant="destructive">{computerData.reduce((sum, item) => sum + item.usbPort.ochiq, 0)}</Badge></div>
+                          <div>Yopiq: <Badge variant="secondary">{computerData.reduce((sum, item) => sum + item.usbPort.yopiq, 0)}</Badge></div>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <div className="space-y-1">
+                          <div>Soz: <Badge variant="secondary">{computerData.reduce((sum, item) => sum + item.ups.soz, 0)}</Badge></div>
+                          <div>Nosoz: <Badge variant="destructive">{computerData.reduce((sum, item) => sum + item.ups.nosoz, 0)}</Badge></div>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <div className="space-y-1">
+                          <div>Soz: <Badge variant="secondary">{computerData.reduce((sum, item) => sum + item.warehouse.soz, 0)}</Badge></div>
+                          <div>Nosoz: <Badge variant="destructive">{computerData.reduce((sum, item) => sum + item.warehouse.nosoz, 0)}</Badge></div>
+                        </div>
+                      </TableCell>
+                    </TableRow>
                   </TableBody>
                 </Table>
               </div>
@@ -356,6 +437,22 @@ export default function Reports() {
                         </TableCell>
                       </TableRow>
                     ))}
+                    <TableRow className="bg-muted/50 font-medium">
+                      <TableCell className="font-bold">Umumiy summa</TableCell>
+                      <TableCell>
+                        <div className="space-y-1">
+                          <div>Soz: <Badge variant="secondary">{phoneData.reduce((sum, item) => sum + item.total.soz, 0)}</Badge></div>
+                          <div>Nosoz: <Badge variant="destructive">{phoneData.reduce((sum, item) => sum + item.total.nosoz, 0)}</Badge></div>
+                        </div>
+                      </TableCell>
+                      <TableCell><Badge variant="default">{phoneData.reduce((sum, item) => sum + item.inUse, 0)}</Badge></TableCell>
+                      <TableCell>
+                        <div className="space-y-1">
+                          <div>Soz: <Badge variant="secondary">{phoneData.reduce((sum, item) => sum + item.warehouse.soz, 0)}</Badge></div>
+                          <div>Nosoz: <Badge variant="destructive">{phoneData.reduce((sum, item) => sum + item.warehouse.nosoz, 0)}</Badge></div>
+                        </div>
+                      </TableCell>
+                    </TableRow>
                   </TableBody>
                 </Table>
               </div>
@@ -405,6 +502,34 @@ export default function Reports() {
                         </TableCell>
                       </TableRow>
                     ))}
+                    <TableRow className="bg-muted/50 font-medium">
+                      <TableCell className="font-bold">Umumiy summa</TableCell>
+                      <TableCell>
+                        <div className="space-y-1">
+                          <div>Soz: <Badge variant="secondary">{printerData.reduce((sum, item) => sum + item.total.soz, 0)}</Badge></div>
+                          <div>Nosoz: <Badge variant="destructive">{printerData.reduce((sum, item) => sum + item.total.nosoz, 0)}</Badge></div>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <div className="space-y-1">
+                          <div>Soz: <Badge variant="secondary">{printerData.reduce((sum, item) => sum + item.organizational.soz, 0)}</Badge></div>
+                          <div>Nosoz: <Badge variant="destructive">{printerData.reduce((sum, item) => sum + item.organizational.nosoz, 0)}</Badge></div>
+                        </div>
+                      </TableCell>
+                      <TableCell><Badge variant="outline">{printerData.reduce((sum, item) => sum + item.personal, 0)}</Badge></TableCell>
+                      <TableCell>
+                        <div className="space-y-1">
+                          <div>Tashkilot: <Badge variant="secondary">{printerData.reduce((sum, item) => sum + item.inUse.organizational, 0)}</Badge></div>
+                          <div>Shaxsiy: <Badge variant="outline">{printerData.reduce((sum, item) => sum + item.inUse.personal, 0)}</Badge></div>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <div className="space-y-1">
+                          <div>Soz: <Badge variant="secondary">{printerData.reduce((sum, item) => sum + item.warehouse.soz, 0)}</Badge></div>
+                          <div>Nosoz: <Badge variant="destructive">{printerData.reduce((sum, item) => sum + item.warehouse.nosoz, 0)}</Badge></div>
+                        </div>
+                      </TableCell>
+                    </TableRow>
                   </TableBody>
                 </Table>
               </div>
