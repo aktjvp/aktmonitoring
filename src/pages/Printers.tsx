@@ -20,91 +20,119 @@ import {
 } from "@/components/ui/select";
 import { Plus, Search, Filter, Edit, Eye, Printer, Wifi, Cable } from "lucide-react";
 
-// Mock data
+// Mock data based on AddPrinter form
 const printers = [
   {
     id: 1,
-    model: "HP LaserJet Pro 400",
+    printerModel: "HP",
+    printerName: "IT bo'limi LaserJet",
     serialNumber: "HP123456789",
-    type: "Lazer",
-    connectivity: "Ethernet",
-    ipAddress: "192.168.1.150",
-    status: "Faol",
-    ownership: "Tashkilot",
-    location: "IT Bo'limi",
-    connectedTo: "Tarmoq",
-    monthlyVolume: 2500,
-    totalPages: 45230,
-    tonerLevel: 85,
-    installDate: "2023-01-10",
-    warranty: "2 yil",
-    vendor: "HP Inc",
-    features: ["Duplex", "Network", "Mobile Print"],
-    lastMaintenance: "2024-01-15",
-    owner: "IT Bo'limi umumiy",
+    acquisitionDate: "2023-01-10",
+    acquisitionType: "organization",
+    technicalCondition: true,
+    connectionType: "Ethernet",
+    connectedComputer: "IT-WORK-001",
+    installedDepartment: "IT Bo'limi",
+    installationDate: "2023-01-15",
+    user: "IT Bo'limi umumiy",
   },
   {
     id: 2,
-    model: "Canon PIXMA G2010",
+    printerModel: "Canon",
+    printerName: "HR bo'limi printer",
     serialNumber: "CAN987654321",
-    type: "Inkjet",
-    connectivity: "USB",
-    ipAddress: "",
-    status: "Faol",
-    ownership: "Shaxsiy",
-    location: "HR Bo'limi",
-    connectedTo: "HR-MONO-003",
-    monthlyVolume: 150,
-    totalPages: 3420,
-    tonerLevel: 60,
-    installDate: "2022-11-15",
-    warranty: "1 yil",
-    vendor: "Canon",
-    features: ["Color", "Tank System"],
-    lastMaintenance: "2023-12-01",
-    owner: "Toshmatov Bobur Rustamovich",
+    acquisitionDate: "2022-11-15",
+    acquisitionType: "personal",
+    technicalCondition: true,
+    connectionType: "USB",
+    connectedComputer: "HR-MONO-003",
+    installedDepartment: "HR Bo'limi",
+    installationDate: "2022-11-20",
+    user: "Toshmatov Bobur Rustamovich",
   },
   {
     id: 3,
-    model: "Epson EcoTank L3150",
+    printerModel: "Epson",
+    printerName: "Moliya EcoTank",
     serialNumber: "EPS456789123",
-    type: "Inkjet",
-    connectivity: "WiFi",
-    ipAddress: "192.168.1.155",
-    status: "Texnik xizmat",
-    ownership: "Tashkilot",
-    location: "Moliya Bo'limi",
-    connectedTo: "Tarmoq",
-    monthlyVolume: 800,
-    totalPages: 12450,
-    tonerLevel: 25,
-    installDate: "2023-03-20",
-    warranty: "3 yil",
-    vendor: "Epson",
-    features: ["Color", "WiFi", "Mobile Print", "Scanner"],
-    lastMaintenance: "2024-02-20",
-    owner: "Moliya Bo'limi umumiy",
+    acquisitionDate: "2023-03-20",
+    acquisitionType: "organization",
+    technicalCondition: false,
+    connectionType: "Ethernet",
+    connectedComputer: "Tarmoq",
+    installedDepartment: "Moliya Bo'limi",
+    installationDate: "2023-03-25",
+    user: "Moliya Bo'limi umumiy",
   },
   {
     id: 4,
-    model: "Brother HL-L2350DW",
+    printerModel: "Brother",
+    printerName: "Marketing Brother printer",
     serialNumber: "BRO789123456",
-    type: "Lazer",
-    connectivity: "WiFi",
-    ipAddress: "192.168.1.160",
-    status: "Faol",
-    ownership: "Tashkilot",
-    location: "Marketing Bo'limi",
-    connectedTo: "Tarmoq",
-    monthlyVolume: 1200,
-    totalPages: 28750,
-    tonerLevel: 40,
-    installDate: "2022-08-05",
-    warranty: "2 yil",
-    vendor: "Brother",
-    features: ["Duplex", "WiFi", "Mobile Print"],
-    lastMaintenance: "2024-01-10",
-    owner: "Marketing Bo'limi umumiy",
+    acquisitionDate: "2022-08-05",
+    acquisitionType: "organization",
+    technicalCondition: true,
+    connectionType: "Ethernet",
+    connectedComputer: "Tarmoq",
+    installedDepartment: "Marketing Bo'limi",
+    installationDate: "2022-08-10",
+    user: "Marketing Bo'limi umumiy",
+  },
+  {
+    id: 5,
+    printerModel: "Samsung",
+    printerName: "Direktor kabineti printer",
+    serialNumber: "SAM111222333",
+    acquisitionDate: "2023-02-14",
+    acquisitionType: "organization",
+    technicalCondition: true,
+    connectionType: "USB",
+    connectedComputer: "DIRECTOR-PC",
+    installedDepartment: "Boshqaruv",
+    installationDate: "2023-02-20",
+    user: "Abdullayev Javohir Bektoshevich",
+  },
+  {
+    id: 6,
+    printerModel: "Lexmark",
+    printerName: "Hisobot bo'limi Lexmark",
+    serialNumber: "LEX444555666",
+    acquisitionDate: "2023-04-10",
+    acquisitionType: "organization",
+    technicalCondition: true,
+    connectionType: "Ethernet",
+    connectedComputer: "Tarmoq",
+    installedDepartment: "Hisobot Bo'limi",
+    installationDate: "2023-04-15",
+    user: "Yusupova Malika Hasanovna",
+  },
+  {
+    id: 7,
+    printerModel: "Xerox",
+    printerName: "Xavfsizlik Xerox",
+    serialNumber: "XER777888999",
+    acquisitionDate: "2023-01-25",
+    acquisitionType: "organization",
+    technicalCondition: false,
+    connectionType: "USB",
+    connectedComputer: "SECURITY-PC",
+    installedDepartment: "Xavfsizlik Bo'limi",
+    installationDate: "2023-02-01",
+    user: "Mirzayev Akmal Karimovich",
+  },
+  {
+    id: 8,
+    printerModel: "Ricoh",
+    printerName: "Qo'llab-quvvatlash Ricoh",
+    serialNumber: "RIC000111222",
+    acquisitionDate: "2023-05-15",
+    acquisitionType: "organization",
+    technicalCondition: true,
+    connectionType: "Ethernet",
+    connectedComputer: "Tarmoq",
+    installedDepartment: "Qo'llab-quvvatlash",
+    installationDate: "2023-05-20",
+    user: "Ibragimova Dilnoza Rustamovna",
   },
 ];
 
@@ -116,23 +144,27 @@ export default function Printers() {
 
   const filteredPrinters = printers.filter((printer) => {
     const matchesSearch = 
-      printer.model.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      printer.printerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      printer.printerModel.toLowerCase().includes(searchTerm.toLowerCase()) ||
       printer.serialNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      printer.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      printer.owner.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesType = selectedType === "all" || printer.type === selectedType;
-    const matchesStatus = selectedStatus === "all" || printer.status === selectedStatus;
-    const matchesOwnership = selectedOwnership === "all" || printer.ownership === selectedOwnership;
+      printer.installedDepartment.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      printer.user.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesType = selectedType === "all" || printer.printerModel === selectedType;
+    const matchesStatus = selectedStatus === "all" || 
+      (selectedStatus === "Faol" && printer.technicalCondition) ||
+      (selectedStatus === "Nosoz" && !printer.technicalCondition);
+    const matchesOwnership = selectedOwnership === "all" || 
+      (selectedOwnership === "Tashkilot" && printer.acquisitionType === "organization") ||
+      (selectedOwnership === "Shaxsiy" && printer.acquisitionType === "personal");
     return matchesSearch && matchesType && matchesStatus && matchesOwnership;
   });
 
-  const getStatusBadgeVariant = (status: string) => {
-    switch (status) {
-      case "Faol": return "default";
-      case "Texnik xizmat": return "destructive";
-      case "O'chiq": return "secondary";
-      default: return "outline";
-    }
+  const getStatusBadgeVariant = (technicalCondition: boolean) => {
+    return technicalCondition ? "default" : "destructive";
+  };
+
+  const getStatusText = (technicalCondition: boolean) => {
+    return technicalCondition ? "Soz" : "Nosoz";
   };
 
   const getTonerLevelColor = (level: number) => {
@@ -182,9 +214,9 @@ export default function Printers() {
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Faol</p>
+                <p className="text-sm font-medium text-muted-foreground">Soz</p>
                 <p className="text-2xl font-bold text-green-600">
-                  {printers.filter(p => p.status === "Faol").length}
+                  {printers.filter(p => p.technicalCondition).length}
                 </p>
               </div>
               <div className="h-8 w-8 rounded-full bg-green-100 flex items-center justify-center">
@@ -199,7 +231,7 @@ export default function Printers() {
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Tashkilot mulki</p>
                 <p className="text-2xl font-bold">
-                  {printers.filter(p => p.ownership === "Tashkilot").length}
+                  {printers.filter(p => p.acquisitionType === "organization").length}
                 </p>
               </div>
               <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
@@ -212,9 +244,9 @@ export default function Printers() {
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Oylik chop etish</p>
+                <p className="text-sm font-medium text-muted-foreground">Ethernet ulanish</p>
                 <p className="text-2xl font-bold">
-                  {printers.reduce((sum, p) => sum + p.monthlyVolume, 0).toLocaleString()}
+                  {printers.filter(p => p.connectionType === "Ethernet").length}
                 </p>
               </div>
               <div className="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center">
@@ -249,10 +281,18 @@ export default function Printers() {
                 <SelectValue placeholder="Turini tanlang" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">Barcha turlar</SelectItem>
-                <SelectItem value="Lazer">Lazer</SelectItem>
-                <SelectItem value="Inkjet">Inkjet</SelectItem>
-                <SelectItem value="Dot Matrix">Dot Matrix</SelectItem>
+                <SelectItem value="all">Barcha modellar</SelectItem>
+                <SelectItem value="HP">HP</SelectItem>
+                <SelectItem value="Canon">Canon</SelectItem>
+                <SelectItem value="Epson">Epson</SelectItem>
+                <SelectItem value="Brother">Brother</SelectItem>
+                <SelectItem value="Samsung">Samsung</SelectItem>
+                <SelectItem value="Lexmark">Lexmark</SelectItem>
+                <SelectItem value="Xerox">Xerox</SelectItem>
+                <SelectItem value="Ricoh">Ricoh</SelectItem>
+                <SelectItem value="Kyocera">Kyocera</SelectItem>
+                <SelectItem value="Dell">Dell</SelectItem>
+                <SelectItem value="Boshqa">Boshqa</SelectItem>
               </SelectContent>
             </Select>
             <Select value={selectedStatus} onValueChange={setSelectedStatus}>
@@ -261,9 +301,8 @@ export default function Printers() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">Barcha holatlar</SelectItem>
-                <SelectItem value="Faol">Faol</SelectItem>
-                <SelectItem value="Texnik xizmat">Texnik xizmat</SelectItem>
-                <SelectItem value="O'chiq">O'chiq</SelectItem>
+                <SelectItem value="Faol">Soz</SelectItem>
+                <SelectItem value="Nosoz">Nosoz</SelectItem>
               </SelectContent>
             </Select>
             <Select value={selectedOwnership} onValueChange={setSelectedOwnership}>
@@ -294,10 +333,8 @@ export default function Printers() {
               <TableHeader>
                 <TableRow>
                   <TableHead>Printer ma'lumotlari</TableHead>
-                  <TableHead>Ulanish</TableHead>
-                  <TableHead>Holat va statistika</TableHead>
-                  <TableHead>Texnik ma'lumotlar</TableHead>
-                  <TableHead>Tegishlilik</TableHead>
+                  <TableHead>Tarmoq ma'lumotlari</TableHead>
+                  <TableHead>Foydalanuvchi</TableHead>
                   <TableHead>Harakatlar</TableHead>
                 </TableRow>
               </TableHeader>
@@ -305,78 +342,56 @@ export default function Printers() {
                 {filteredPrinters.map((printer) => (
                   <TableRow key={printer.id}>
                     <TableCell>
-                      <div className="space-y-1">
-                        <div className="font-semibold">{printer.model}</div>
-                        <div className="text-sm text-muted-foreground">{printer.vendor}</div>
-                        <Badge variant="outline" className="text-xs">
-                          {printer.type}
-                        </Badge>
+                      <div className="space-y-2">
+                        <div className="font-semibold">{printer.printerName}</div>
+                        <div className="text-sm text-muted-foreground">
+                          <Badge variant="outline" className="text-xs mr-2">
+                            {printer.printerModel}
+                          </Badge>
+                        </div>
                         <div className="text-xs text-muted-foreground">
                           S/N: {printer.serialNumber}
                         </div>
-                        <div className="flex flex-wrap gap-1">
-                          {printer.features.map((feature, index) => (
-                            <Badge key={index} variant="outline" className="text-xs">
-                              {feature}
-                            </Badge>
-                          ))}
+                        <div className="text-xs">
+                          <strong>Olingan sana:</strong> {printer.acquisitionDate}
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Badge 
+                            variant={printer.acquisitionType === "organization" ? "default" : "secondary"} 
+                            className="text-xs"
+                          >
+                            {printer.acquisitionType === "organization" ? "Tashkilot" : "Shaxsiy"}
+                          </Badge>
+                          <Badge 
+                            variant={getStatusBadgeVariant(printer.technicalCondition)} 
+                            className="text-xs"
+                          >
+                            {getStatusText(printer.technicalCondition)}
+                          </Badge>
                         </div>
                       </div>
                     </TableCell>
                     <TableCell>
-                      <div className="space-y-1">
+                      <div className="text-sm space-y-1">
                         <div className="flex items-center gap-1">
-                          {getConnectivityIcon(printer.connectivity)}
-                          <span className="text-sm">{printer.connectivity}</span>
-                        </div>
-                        {printer.ipAddress && (
-                          <div className="text-xs text-muted-foreground">
-                            IP: {printer.ipAddress}
-                          </div>
-                        )}
-                        <div className="text-xs">
-                          <strong>Ulangan:</strong> {printer.connectedTo}
+                          {getConnectivityIcon(printer.connectionType)}
+                          <span className="text-sm">{printer.connectionType}</span>
                         </div>
                         <div className="text-xs">
-                          <strong>Joylashuv:</strong> {printer.location}
+                          <strong>Kompyuter:</strong> {printer.connectedComputer}
+                        </div>
+                        <div className="text-xs">
+                          <strong>Bo'lim:</strong> {printer.installedDepartment}
+                        </div>
+                        <div className="text-xs">
+                          <strong>O'rnatilgan:</strong> {printer.installationDate}
                         </div>
                       </div>
                     </TableCell>
                     <TableCell>
-                      <div className="space-y-1">
-                        <Badge variant={getStatusBadgeVariant(printer.status)} className="text-xs">
-                          {printer.status}
-                        </Badge>
-                        <div className="text-xs">
-                          <strong>Toner:</strong> 
-                          <span className={getTonerLevelColor(printer.tonerLevel)}>
-                            {" "}{printer.tonerLevel}%
-                          </span>
-                        </div>
-                        <div className="text-xs">
-                          <strong>Oylik:</strong> {printer.monthlyVolume.toLocaleString()}
-                        </div>
-                        <div className="text-xs">
-                          <strong>Jami:</strong> {printer.totalPages.toLocaleString()}
-                        </div>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="text-xs space-y-1">
-                        <div><strong>O'rnatilgan:</strong> {printer.installDate}</div>
-                        <div><strong>Kafolat:</strong> {printer.warranty}</div>
-                        <div><strong>Oxirgi xizmat:</strong> {printer.lastMaintenance}</div>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="space-y-1">
-                        <Badge 
-                          variant={printer.ownership === "Tashkilot" ? "default" : "secondary"} 
-                          className="text-xs"
-                        >
-                          {printer.ownership}
-                        </Badge>
-                        <div className="text-xs font-medium">{printer.owner}</div>
+                      <div className="text-sm">
+                        <div className="font-medium">{printer.user}</div>
+                        <div className="text-muted-foreground text-xs">{printer.installedDepartment}</div>
                       </div>
                     </TableCell>
                     <TableCell>

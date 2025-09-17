@@ -20,71 +20,119 @@ import {
 } from "@/components/ui/select";
 import { Plus, Search, Filter, Edit, Eye, Smartphone } from "lucide-react";
 
-// Mock data
+// Mock data based on AddPhone form
 const phones = [
   {
     id: 1,
-    model: "Cisco IP Phone 7965",
-    macAddress: "AA:BB:CC:DD:EE:FF",
-    internalNumber: "101",
-    serviceNumber: "+998 90 123 45 67",
-    status: "Faol",
-    features: ["HD Audio", "Ethernet", "PoE"],
-    location: "IT Bo'limi",
-    owner: "Karimov Sardor Akmalovich",
-    installDate: "2023-01-15",
-    warranty: "2 yil",
-    vendor: "Cisco Systems",
-    firmwareVersion: "9.14.1",
+    phoneName: "IT Bo'limi telefoni",
+    macAddress: "00:1B:44:11:3A:B7",
+    acquisitionDate: "2023-01-15",
+    technicalCondition: true,
+    internalPhoneNumber: "101",
+    servicePhone: "+998 90 123 45 67",
     ipAddress: "192.168.1.101",
+    installedDepartment: "IT Bo'limi",
+    installationDate: "2023-01-20",
+    workingStatus: true,
+    user: "Karimov Sardor Akmalovich",
   },
   {
     id: 2,
-    model: "Avaya 9611G",
-    macAddress: "BB:CC:DD:EE:FF:AA",
-    internalNumber: "201",
-    serviceNumber: "+998 91 234 56 78",
-    status: "Faol",
-    features: ["Color Display", "Gigabit Ethernet"],
-    location: "Moliya Bo'limi",
-    owner: "Rahimova Nozima Turgunovna",
-    installDate: "2023-02-20",
-    warranty: "3 yil",
-    vendor: "Avaya Inc",
-    firmwareVersion: "6.8.5",
+    phoneName: "Moliya bo'limi telefoni",
+    macAddress: "00:1B:44:22:4B:C8",
+    acquisitionDate: "2023-02-10",
+    technicalCondition: true,
+    internalPhoneNumber: "201",
+    servicePhone: "+998 91 234 56 78",
     ipAddress: "192.168.1.201",
+    installedDepartment: "Moliya Bo'limi",
+    installationDate: "2023-02-15",
+    workingStatus: true,
+    user: "Rahimova Nozima Turgunovna",
   },
   {
     id: 3,
-    model: "Grandstream GXP2170",
-    macAddress: "CC:DD:EE:FF:AA:BB",
-    internalNumber: "301",
-    serviceNumber: "+998 93 345 67 89",
-    status: "Texnik xizmat",
-    features: ["12 Line Keys", "HD Audio", "Color LCD"],
-    location: "HR Bo'limi",
-    owner: "Toshmatov Bobur Rustamovich",
-    installDate: "2022-11-10",
-    warranty: "1 yil",
-    vendor: "Grandstream",
-    firmwareVersion: "1.0.20.23",
+    phoneName: "HR bo'limi telefoni",
+    macAddress: "00:1B:44:33:5C:D9",
+    acquisitionDate: "2022-11-05",
+    technicalCondition: false,
+    internalPhoneNumber: "301",
+    servicePhone: "+998 93 345 67 89",
     ipAddress: "192.168.1.301",
+    installedDepartment: "HR Bo'limi",
+    installationDate: "2022-11-10",
+    workingStatus: false,
+    user: "Toshmatov Bobur Rustamovich",
   },
   {
     id: 4,
-    model: "Yealink T46S",
-    macAddress: "DD:EE:FF:AA:BB:CC",
-    internalNumber: "401",
-    serviceNumber: "+998 94 456 78 90",
-    status: "Faol",
-    features: ["Color Screen", "Bluetooth", "WiFi"],
-    location: "Marketing Bo'limi",
-    owner: "Olimova Gulnora Azimovna",
-    installDate: "2023-03-05",
-    warranty: "2 yil",
-    vendor: "Yealink",
-    firmwareVersion: "66.85.0.125",
+    phoneName: "Marketing bo'limi telefoni",
+    macAddress: "00:1B:44:44:6D:EA",
+    acquisitionDate: "2023-03-01",
+    technicalCondition: true,
+    internalPhoneNumber: "401",
+    servicePhone: "+998 94 456 78 90",
     ipAddress: "192.168.1.401",
+    installedDepartment: "Marketing Bo'limi",
+    installationDate: "2023-03-05",
+    workingStatus: true,
+    user: "Olimova Gulnora Azimovna",
+  },
+  {
+    id: 5,
+    phoneName: "Bosh direktor telefoni",
+    macAddress: "00:1B:44:55:7E:FB",
+    acquisitionDate: "2022-12-20",
+    technicalCondition: true,
+    internalPhoneNumber: "100",
+    servicePhone: "+998 95 567 89 01",
+    ipAddress: "192.168.1.100",
+    installedDepartment: "Boshqaruv",
+    installationDate: "2022-12-25",
+    workingStatus: true,
+    user: "Abdullayev Javohir Bektoshevich",
+  },
+  {
+    id: 6,
+    phoneName: "Hisobot bo'limi telefoni",
+    macAddress: "00:1B:44:66:8F:0C",
+    acquisitionDate: "2023-04-10",
+    technicalCondition: true,
+    internalPhoneNumber: "501",
+    servicePhone: "+998 97 678 90 12",
+    ipAddress: "192.168.1.501",
+    installedDepartment: "Hisobot Bo'limi",
+    installationDate: "2023-04-15",
+    workingStatus: true,
+    user: "Yusupova Malika Hasanovna",
+  },
+  {
+    id: 7,
+    phoneName: "Xavfsizlik bo'limi telefoni",
+    macAddress: "00:1B:44:77:90:1D",
+    acquisitionDate: "2023-01-25",
+    technicalCondition: false,
+    internalPhoneNumber: "601",
+    servicePhone: "+998 98 789 01 23",
+    ipAddress: "192.168.1.601",
+    installedDepartment: "Xavfsizlik Bo'limi",
+    installationDate: "2023-02-01",
+    workingStatus: false,
+    user: "Mirzayev Akmal Karimovich",
+  },
+  {
+    id: 8,
+    phoneName: "Qo'llab-quvvatlash telefoni",
+    macAddress: "00:1B:44:88:A1:2E",
+    acquisitionDate: "2023-05-15",
+    technicalCondition: true,
+    internalPhoneNumber: "701",
+    servicePhone: "+998 99 890 12 34",
+    ipAddress: "192.168.1.701",
+    installedDepartment: "Qo'llab-quvvatlash",
+    installationDate: "2023-05-20",
+    workingStatus: true,
+    user: "Ibragimova Dilnoza Rustamovna",
   },
 ];
 
@@ -95,22 +143,27 @@ export default function Phones() {
 
   const filteredPhones = phones.filter((phone) => {
     const matchesSearch = 
-      phone.model.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      phone.phoneName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       phone.macAddress.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      phone.internalNumber.includes(searchTerm) ||
-      phone.owner.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = selectedStatus === "all" || phone.status === selectedStatus;
-    const matchesDepartment = selectedDepartment === "all" || phone.location === selectedDepartment;
+      phone.internalPhoneNumber.includes(searchTerm) ||
+      phone.user.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesStatus = selectedStatus === "all" || 
+      (selectedStatus === "Faol" && phone.workingStatus) ||
+      (selectedStatus === "Nosoz" && !phone.workingStatus);
+    const matchesDepartment = selectedDepartment === "all" || phone.installedDepartment === selectedDepartment;
     return matchesSearch && matchesStatus && matchesDepartment;
   });
 
-  const getStatusBadgeVariant = (status: string) => {
-    switch (status) {
-      case "Faol": return "default";
-      case "Texnik xizmat": return "destructive";
-      case "O'chiq": return "secondary";
-      default: return "outline";
-    }
+  const getStatusBadgeVariant = (workingStatus: boolean, technicalCondition: boolean) => {
+    if (!technicalCondition) return "destructive";
+    if (workingStatus) return "default";
+    return "secondary";
+  };
+
+  const getStatusText = (workingStatus: boolean, technicalCondition: boolean) => {
+    if (!technicalCondition) return "Nosoz";
+    if (workingStatus) return "Faol";
+    return "Tarmoqdan uzilgan";
   };
 
   return (
@@ -147,7 +200,7 @@ export default function Phones() {
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Faol</p>
                 <p className="text-2xl font-bold text-green-600">
-                  {phones.filter(p => p.status === "Faol").length}
+                  {phones.filter(p => p.workingStatus && p.technicalCondition).length}
                 </p>
               </div>
               <div className="h-8 w-8 rounded-full bg-green-100 flex items-center justify-center">
@@ -160,9 +213,9 @@ export default function Phones() {
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Texnik xizmat</p>
+                <p className="text-sm font-medium text-muted-foreground">Nosoz</p>
                 <p className="text-2xl font-bold text-yellow-600">
-                  {phones.filter(p => p.status === "Texnik xizmat").length}
+                  {phones.filter(p => !p.technicalCondition).length}
                 </p>
               </div>
               <div className="h-8 w-8 rounded-full bg-yellow-100 flex items-center justify-center">
@@ -212,8 +265,7 @@ export default function Phones() {
               <SelectContent>
                 <SelectItem value="all">Barcha holatlar</SelectItem>
                 <SelectItem value="Faol">Faol</SelectItem>
-                <SelectItem value="Texnik xizmat">Texnik xizmat</SelectItem>
-                <SelectItem value="O'chiq">O'chiq</SelectItem>
+                <SelectItem value="Nosoz">Nosoz</SelectItem>
               </SelectContent>
             </Select>
             <Select value={selectedDepartment} onValueChange={setSelectedDepartment}>
@@ -226,6 +278,10 @@ export default function Phones() {
                 <SelectItem value="Moliya Bo'limi">Moliya Bo'limi</SelectItem>
                 <SelectItem value="HR Bo'limi">HR Bo'limi</SelectItem>
                 <SelectItem value="Marketing Bo'limi">Marketing Bo'limi</SelectItem>
+                <SelectItem value="Boshqaruv">Boshqaruv</SelectItem>
+                <SelectItem value="Hisobot Bo'limi">Hisobot Bo'limi</SelectItem>
+                <SelectItem value="Xavfsizlik Bo'limi">Xavfsizlik Bo'limi</SelectItem>
+                <SelectItem value="Qo'llab-quvvatlash">Qo'llab-quvvatlash</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -246,11 +302,9 @@ export default function Phones() {
               <TableHeader>
                 <TableRow>
                   <TableHead>Telefon ma'lumotlari</TableHead>
-                  <TableHead>Raqamlar</TableHead>
+                  <TableHead>Telefon raqamlari</TableHead>
                   <TableHead>Tarmoq ma'lumotlari</TableHead>
-                  <TableHead>Texnik ma'lumotlar</TableHead>
-                  <TableHead>Holat</TableHead>
-                  <TableHead>Egasi</TableHead>
+                  <TableHead>Foydalanuvchi</TableHead>
                   <TableHead>Harakatlar</TableHead>
                 </TableRow>
               </TableHeader>
@@ -258,49 +312,49 @@ export default function Phones() {
                 {filteredPhones.map((phone) => (
                   <TableRow key={phone.id}>
                     <TableCell>
-                      <div className="space-y-1">
-                        <div className="font-semibold">{phone.model}</div>
-                        <div className="text-sm text-muted-foreground">{phone.vendor}</div>
+                      <div className="space-y-2">
+                        <div className="font-semibold">{phone.phoneName}</div>
                         <div className="text-xs text-muted-foreground font-mono">
                           MAC: {phone.macAddress}
                         </div>
-                        <div className="flex flex-wrap gap-1">
-                          {phone.features.map((feature, index) => (
-                            <Badge key={index} variant="outline" className="text-xs">
-                              {feature}
-                            </Badge>
-                          ))}
+                        <div className="text-xs">
+                          <strong>Olingan sana:</strong> {phone.acquisitionDate}
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Badge 
+                            variant={phone.technicalCondition ? "default" : "destructive"} 
+                            className="text-xs"
+                          >
+                            {phone.technicalCondition ? "Soz" : "Nosoz"}
+                          </Badge>
                         </div>
                       </div>
                     </TableCell>
                     <TableCell>
                       <div className="text-sm space-y-1">
-                        <div><strong>Ichki:</strong> {phone.internalNumber}</div>
-                        <div><strong>Xizmat:</strong> {phone.serviceNumber}</div>
+                        <div><strong>Ichki:</strong> {phone.internalPhoneNumber}</div>
+                        <div><strong>Xizmat:</strong> {phone.servicePhone}</div>
                       </div>
                     </TableCell>
                     <TableCell>
                       <div className="text-sm space-y-1">
                         <div><strong>IP:</strong> {phone.ipAddress}</div>
-                        <div><strong>Firmware:</strong> {phone.firmwareVersion}</div>
-                        <div><strong>Joylashuv:</strong> {phone.location}</div>
+                        <div><strong>Bo'lim:</strong> {phone.installedDepartment}</div>
+                        <div><strong>O'rnatilgan:</strong> {phone.installationDate}</div>
+                        <div className="flex items-center gap-2">
+                          <Badge 
+                            variant={getStatusBadgeVariant(phone.workingStatus, phone.technicalCondition)} 
+                            className="text-xs"
+                          >
+                            {getStatusText(phone.workingStatus, phone.technicalCondition)}
+                          </Badge>
+                        </div>
                       </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="text-sm space-y-1">
-                        <div><strong>O'rnatilgan:</strong> {phone.installDate}</div>
-                        <div><strong>Kafolat:</strong> {phone.warranty}</div>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant={getStatusBadgeVariant(phone.status)} className="text-xs">
-                        {phone.status}
-                      </Badge>
                     </TableCell>
                     <TableCell>
                       <div className="text-sm">
-                        <div className="font-medium">{phone.owner}</div>
-                        <div className="text-muted-foreground">{phone.location}</div>
+                        <div className="font-medium">{phone.user}</div>
+                        <div className="text-muted-foreground text-xs">{phone.installedDepartment}</div>
                       </div>
                     </TableCell>
                     <TableCell>
