@@ -17,6 +17,7 @@ import Printers from "./pages/Printers";
 import AddPrinter from "./pages/AddPrinter";
 import Serverxonalar from "./pages/Serverxonalar";
 import Turniketlar from "./pages/Turniketlar";
+import Reports from "./pages/Reports";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -42,7 +43,7 @@ const App = () => (
             <Route path="printers/add" element={<AddPrinter />} />
             <Route path="serverxonalar" element={<Serverxonalar />} />
             <Route path="turniketlar" element={<Turniketlar />} />
-            <Route path="reports" element={<Dashboard />} />
+            <Route path="reports" element={<Reports />} />
             <Route path="settings" element={<Dashboard />} />
           </Route>
           <Route path="*" element={<NotFound />} />
