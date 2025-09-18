@@ -19,6 +19,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Plus, Search, Filter, Edit, Eye, Smartphone } from "lucide-react";
+import { Link } from "react-router-dom";
 
 // Mock data based on AddPhone form
 const phones = [
@@ -176,8 +177,10 @@ export default function Phones() {
           </p>
         </div>
         <Button className="bg-primary hover:bg-primary/90">
-          <Plus className="mr-2 h-4 w-4" />
-          Yangi telefon qo'shish
+          <Link to="/phones/add">
+            <Plus className="mr-2 h-4 w-4" />
+            Yangi telefon qo'shish
+          </Link>
         </Button>
       </div>
 

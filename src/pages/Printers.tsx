@@ -19,6 +19,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Plus, Search, Filter, Edit, Eye, Printer, Wifi, Cable } from "lucide-react";
+import { Link } from "react-router-dom";
 
 // Mock data based on AddPrinter form
 const printers = [
@@ -192,8 +193,10 @@ export default function Printers() {
           </p>
         </div>
         <Button className="bg-primary hover:bg-primary/90">
-          <Plus className="mr-2 h-4 w-4" />
-          Yangi printer qo'shish
+          <Link to="/printers/add">
+            <Plus className="mr-2 h-4 w-4" />
+            Yangi printer qo'shish
+          </Link>
         </Button>
       </div>
 
