@@ -40,7 +40,7 @@ const computers = [
     antivirusName: "Kaspersky Endpoint Security",
     antivirusUpdateDate: "20.12.2024",
     hasInternet: true,
-    browserModel: "Chrome 120.0.6099.109",
+    browserModel: "Chrome 138",
     hasBiosPassword: true,
     hasUserPassword: true,
     seal: { available: true, number: "SEAL001" },
