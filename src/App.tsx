@@ -7,6 +7,7 @@ import { MainLayout } from "./components/layout/MainLayout";
 import Dashboard from "./pages/Dashboard";
 import Employees from "./pages/Employees";
 import AddEmployee from "./pages/AddEmployee";
+import EditEmployee from "./pages/EditEmployee";
 import Departments from "./pages/Departments";
 import AddDepartment from "./pages/AddDepartment";
 import Computers from "./pages/Computers";
@@ -33,6 +34,7 @@ const App = () => (
             <Route index element={<Dashboard />} />
             <Route path="employees" element={<Employees />} />
             <Route path="employees/add" element={<AddEmployee />} />
+            <Route path="employees/:id/edit" element={<EditEmployee />} />
             <Route path="departments" element={<Departments />} />
             <Route path="departments/add" element={<AddDepartment />} />
             <Route path="computers" element={<Computers />} />

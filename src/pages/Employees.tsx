@@ -19,7 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Plus, Search, Filter, Edit, Eye } from "lucide-react";
+import { Plus, Search, Filter, Edit } from "lucide-react";
 
 // Mock data
 const employees = [
@@ -304,10 +304,11 @@ export default function Employees() {
                     </TableCell>
                     <TableCell>
                       <div className="flex gap-2">
-                        <Button variant="outline" size="sm">
-                          <Eye className="h-4 w-4" />
-                        </Button>
-                        <Button variant="outline" size="sm">
+                        <Button 
+                          variant="outline" 
+                          size="sm"
+                          onClick={() => navigate(`/employees/${employee.id}/edit`)}
+                        >
                           <Edit className="h-4 w-4" />
                         </Button>
                       </div>
