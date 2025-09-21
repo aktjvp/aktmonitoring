@@ -29,7 +29,8 @@ import {
   Search,
   CheckCircle,
   XCircle,
-  Eye
+  Eye,
+  Plus
 } from "lucide-react";
 import { useState } from "react";
 
@@ -168,6 +169,10 @@ export default function Serverxonalar() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold">Serverxonalar</h1>
+        <Button onClick={() => window.location.href = "/add-serverroom"}>
+          <Plus className="h-4 w-4 mr-2" />
+          Yangi serverxona qo'shish
+        </Button>
       </div>
 
       {/* Statistics Cards */}

@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import Employees from "./pages/Employees";
 import AddEmployee from "./pages/AddEmployee";
 import EditEmployee from "./pages/EditEmployee";
+import AddServerRoom from "./pages/AddServerRoom";
 import Departments from "./pages/Departments";
 import AddDepartment from "./pages/AddDepartment";
 import Computers from "./pages/Computers";
@@ -44,6 +45,7 @@ const App = () => (
             <Route path="printers" element={<Printers />} />
             <Route path="printers/add" element={<AddPrinter />} />
             <Route path="serverxonalar" element={<Serverxonalar />} />
+            <Route path="add-serverroom" element={<AddServerRoom />} />
             <Route path="turniketlar" element={<Turniketlar />} />
             <Route path="reports" element={<Reports />} />
             <Route path="settings" element={<Dashboard />} />
