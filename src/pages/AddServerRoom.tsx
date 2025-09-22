@@ -13,17 +13,17 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 import { Plus, Trash2, ArrowLeft } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 const formSchema = z.object({
   location: z.string().min(1, "Joylashuv to'ldirilishi shart"),
-  doorMaterial: z.boolean(),
+  doorMaterial: z.enum(["temir", "taxta"]),
   windowBars: z.boolean(),
   floorMaterial: z.string().min(1, "Pol materiali to'ldirilishi shart"),
-  fireAlarm: z.boolean(),
-  securityAlarm: z.boolean(),
+  fireAlarm: z.enum(["ishlayapti", "ishlamayapti"]),
+  securityAlarm: z.enum(["ishlayapti", "ishlamayapti"]),
   fireExtinguisher: z.boolean(),
   hasCamera: z.enum(["yes", "no"]),
   cameraIP: z.string().optional(),
@@ -83,11 +83,11 @@ export default function AddServerRoom() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       location: "",
-      doorMaterial: true,
+      doorMaterial: "temir",
       windowBars: true,
       floorMaterial: "",
-      fireAlarm: true,
-      securityAlarm: true,
+      fireAlarm: "ishlayapti",
+      securityAlarm: "ishlayapti",
       fireExtinguisher: true,
       hasCamera: "no",
       cameraIP: "",
@@ -251,439 +251,454 @@ export default function AddServerRoom() {
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <Tabs defaultValue="basic" className="w-full">
-            <TabsList className="grid w-full grid-cols-4">
-              <TabsTrigger value="basic">Asosiy ma'lumotlar</TabsTrigger>
-              <TabsTrigger value="security">Xavfsizlik</TabsTrigger>
-              <TabsTrigger value="equipment">Texnik jihozlar</TabsTrigger>
-              <TabsTrigger value="additional">Qo'shimcha</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="basic">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Asosiy ma'lumotlar</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <FormField
-                    control={form.control}
-                    name="location"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Joylashuvi *</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Masalan: Markaziy bino, 1-qavat" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="doorMaterial"
-                    render={({ field }) => (
-                      <FormItem className="flex items-center justify-between">
-                        <FormLabel>Eshik materiali</FormLabel>
-                        <div className="flex items-center space-x-2">
-                          <Label htmlFor="door-material">Taxta</Label>
-                          <FormControl>
-                            <Switch
-                              id="door-material"
-                              checked={field.value}
-                              onCheckedChange={field.onChange}
-                            />
-                          </FormControl>
-                          <Label htmlFor="door-material">Temir</Label>
-                        </div>
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="windowBars"
-                    render={({ field }) => (
-                      <FormItem className="flex items-center justify-between">
-                        <FormLabel>Derazada temir panjara</FormLabel>
-                        <div className="flex items-center space-x-2">
-                          <Label htmlFor="window-bars">Yo'q</Label>
-                          <FormControl>
-                            <Switch
-                              id="window-bars"
-                              checked={field.value}
-                              onCheckedChange={field.onChange}
-                            />
-                          </FormControl>
-                          <Label htmlFor="window-bars">Bor</Label>
-                        </div>
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="floorMaterial"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Pol materiali *</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Masalan: Antistatik gilam, Keramik, Beton" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="security">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Xavfsizlik</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <FormField
-                    control={form.control}
-                    name="fireAlarm"
-                    render={({ field }) => (
-                      <FormItem className="flex items-center justify-between">
-                        <FormLabel>Yong'inga qarshi signalizatsiya</FormLabel>
-                        <div className="flex items-center space-x-2">
-                          <Label htmlFor="fire-alarm">Ishlamayapti</Label>
-                          <FormControl>
-                            <Switch
-                              id="fire-alarm"
-                              checked={field.value}
-                              onCheckedChange={field.onChange}
-                            />
-                          </FormControl>
-                          <Label htmlFor="fire-alarm">Ishlayapti</Label>
-                        </div>
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="securityAlarm"
-                    render={({ field }) => (
-                      <FormItem className="flex items-center justify-between">
-                        <FormLabel>Qo'riqlash signalizatsiya</FormLabel>
-                        <div className="flex items-center space-x-2">
-                          <Label htmlFor="security-alarm">Ishlamayapti</Label>
-                          <FormControl>
-                            <Switch
-                              id="security-alarm"
-                              checked={field.value}
-                              onCheckedChange={field.onChange}
-                            />
-                          </FormControl>
-                          <Label htmlFor="security-alarm">Ishlayapti</Label>
-                        </div>
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="fireExtinguisher"
-                    render={({ field }) => (
-                      <FormItem className="flex items-center justify-between">
-                        <FormLabel>O't o'chirish moslama</FormLabel>
-                        <div className="flex items-center space-x-2">
-                          <Label htmlFor="fire-extinguisher">Yo'q</Label>
-                          <FormControl>
-                            <Switch
-                              id="fire-extinguisher"
-                              checked={field.value}
-                              onCheckedChange={field.onChange}
-                            />
-                          </FormControl>
-                          <Label htmlFor="fire-extinguisher">Bor</Label>
-                        </div>
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="hasCamera"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Video-kuzatuv kamerasi</FormLabel>
-                        <FormControl>
-                          <RadioGroup
-                            value={field.value}
-                            onValueChange={field.onChange}
-                            className="flex items-center space-x-6"
-                          >
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="no" id="camera-no" />
-                              <Label htmlFor="camera-no">Yo'q</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="yes" id="camera-yes" />
-                              <Label htmlFor="camera-yes">Bor</Label>
-                            </div>
-                          </RadioGroup>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  {form.watch("hasCamera") === "yes" && (
-                    <FormField
-                      control={form.control}
-                      name="cameraIP"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Kamera IP manzili *</FormLabel>
-                          <FormControl>
-                            <Input placeholder="192.168.1.100" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+          <div className="grid gap-6">
+            {/* Asosiy ma'lumotlar Card */}
+            <Card>
+              <CardHeader>
+                <CardTitle>1. Asosiy ma'lumotlar</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <FormField
+                  control={form.control}
+                  name="location"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Joylashuvi *</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Masalan: Markaziy bino, 1-qavat" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
                   )}
-                </CardContent>
-              </Card>
-            </TabsContent>
+                />
 
-            <TabsContent value="equipment">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Texnik jihozlar</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-8">
-                  <EquipmentSection 
-                    title="Server" 
-                    items={servers} 
-                    type="servers" 
-                  />
-
-                  <EquipmentSection 
-                    title="Marshrutizator" 
-                    items={routers} 
-                    type="routers" 
-                  />
-
-                  <EquipmentSection 
-                    title="Kommutator" 
-                    items={switches} 
-                    type="switches" 
-                  />
-
-                  <div className="grid grid-cols-2 gap-4">
-                    <FormField
-                      control={form.control}
-                      name="ups"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>UPS soni</FormLabel>
-                          <FormControl>
-                            <Input 
-                              type="number" 
-                              min="0" 
-                              {...field}
-                              onChange={(e) => field.onChange(parseInt(e.target.value) || 0)}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="stabilizer"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Stabilizator soni</FormLabel>
-                          <FormControl>
-                            <Input 
-                              type="number" 
-                              min="0" 
-                              {...field}
-                              onChange={(e) => field.onChange(parseInt(e.target.value) || 0)}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="additional">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Qo'shimcha ma'lumotlar</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <FormField
-                    control={form.control}
-                    name="hasAirConditioner"
-                    render={({ field }) => (
-                      <FormItem className="flex items-center justify-between">
-                        <FormLabel>Konditsioner</FormLabel>
-                        <div className="flex items-center space-x-2">
-                          <Label htmlFor="air-conditioner">Yo'q</Label>
-                          <FormControl>
-                            <Switch
-                              id="air-conditioner"
-                              checked={field.value}
-                              onCheckedChange={field.onChange}
-                            />
-                          </FormControl>
-                          <Label htmlFor="air-conditioner">Bor</Label>
-                        </div>
-                      </FormItem>
-                    )}
-                  />
-
-                  {form.watch("hasAirConditioner") && (
-                    <FormField
-                      control={form.control}
-                      name="airConditionerBTU"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Konditsioner quvvati *</FormLabel>
-                          <Select onValueChange={field.onChange} value={field.value}>
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="BTU/h tanlanmang" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="7000">7000 BTU/h</SelectItem>
-                              <SelectItem value="9000">9000 BTU/h</SelectItem>
-                              <SelectItem value="12000">12000 BTU/h</SelectItem>
-                              <SelectItem value="18000">18000 BTU/h</SelectItem>
-                              <SelectItem value="24000">24000 BTU/h</SelectItem>
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                <FormField
+                  control={form.control}
+                  name="doorMaterial"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Eshik materiali</FormLabel>
+                      <FormControl>
+                        <RadioGroup
+                          value={field.value}
+                          onValueChange={field.onChange}
+                          className="flex items-center space-x-6"
+                        >
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="temir" id="door-temir" />
+                            <Label htmlFor="door-temir">Temir</Label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="taxta" id="door-taxta" />
+                            <Label htmlFor="door-taxta">Taxta</Label>
+                          </div>
+                        </RadioGroup>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
                   )}
+                />
 
+                <FormField
+                  control={form.control}
+                  name="windowBars"
+                  render={({ field }) => (
+                    <FormItem className="flex items-center justify-between">
+                      <FormLabel>Derazada temir panjara</FormLabel>
+                      <div className="flex items-center space-x-2">
+                        <Label htmlFor="window-bars">Yo'q</Label>
+                        <FormControl>
+                          <Switch
+                            id="window-bars"
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                        <Label htmlFor="window-bars">Bor</Label>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="floorMaterial"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Pol materiali *</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Masalan: Antistatik gilam, Keramik, Beton" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </CardContent>
+            </Card>
+
+            {/* Xavfsizlik Card */}
+            <Card>
+              <CardHeader>
+                <CardTitle>2. Xavfsizlik</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <FormField
+                  control={form.control}
+                  name="fireAlarm"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Yong'inga qarshi signalizatsiya</FormLabel>
+                      <FormControl>
+                        <RadioGroup
+                          value={field.value}
+                          onValueChange={field.onChange}
+                          className="flex items-center space-x-6"
+                        >
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="ishlayapti" id="fire-alarm-working" />
+                            <Label htmlFor="fire-alarm-working">Ishlayapti</Label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="ishlamayapti" id="fire-alarm-not-working" />
+                            <Label htmlFor="fire-alarm-not-working">Ishlamayapti</Label>
+                          </div>
+                        </RadioGroup>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="securityAlarm"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Qo'riqlash signalizatsiya</FormLabel>
+                      <FormControl>
+                        <RadioGroup
+                          value={field.value}
+                          onValueChange={field.onChange}
+                          className="flex items-center space-x-6"
+                        >
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="ishlayapti" id="security-alarm-working" />
+                            <Label htmlFor="security-alarm-working">Ishlayapti</Label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="ishlamayapti" id="security-alarm-not-working" />
+                            <Label htmlFor="security-alarm-not-working">Ishlamayapti</Label>
+                          </div>
+                        </RadioGroup>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="fireExtinguisher"
+                  render={({ field }) => (
+                    <FormItem className="flex items-center justify-between">
+                      <FormLabel>O't o'chirish moslama</FormLabel>
+                      <div className="flex items-center space-x-2">
+                        <Label htmlFor="fire-extinguisher">Yo'q</Label>
+                        <FormControl>
+                          <Switch
+                            id="fire-extinguisher"
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                        <Label htmlFor="fire-extinguisher">Bor</Label>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="hasCamera"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Video-kuzatuv kamerasi</FormLabel>
+                      <FormControl>
+                        <RadioGroup
+                          value={field.value}
+                          onValueChange={field.onChange}
+                          className="flex items-center space-x-6"
+                        >
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="yes" id="camera-yes" />
+                            <Label htmlFor="camera-yes">Bor</Label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="no" id="camera-no" />
+                            <Label htmlFor="camera-no">Yo'q</Label>
+                          </div>
+                        </RadioGroup>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {form.watch("hasCamera") === "yes" && (
                   <FormField
                     control={form.control}
-                    name="hasCarpet"
-                    render={({ field }) => (
-                      <FormItem className="flex items-center justify-between">
-                        <FormLabel>Polda texnika tagida gilam/kovrolon</FormLabel>
-                        <div className="flex items-center space-x-2">
-                          <Label htmlFor="carpet">Yo'q</Label>
-                          <FormControl>
-                            <Switch
-                              id="carpet"
-                              checked={field.value}
-                              onCheckedChange={field.onChange}
-                            />
-                          </FormControl>
-                          <Label htmlFor="carpet">Bor</Label>
-                        </div>
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="cableManagement"
-                    render={({ field }) => (
-                      <FormItem className="flex items-center justify-between">
-                        <FormLabel>Kabel liniyalari tartibga keltirilganligi</FormLabel>
-                        <div className="flex items-center space-x-2">
-                          <Label htmlFor="cable-management">Yo'q</Label>
-                          <FormControl>
-                            <Switch
-                              id="cable-management"
-                              checked={field.value}
-                              onCheckedChange={field.onChange}
-                            />
-                          </FormControl>
-                          <Label htmlFor="cable-management">Ha</Label>
-                        </div>
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="hasThermometer"
-                    render={({ field }) => (
-                      <FormItem className="flex items-center justify-between">
-                        <FormLabel>Termometr</FormLabel>
-                        <div className="flex items-center space-x-2">
-                          <Label htmlFor="thermometer">Yo'q</Label>
-                          <FormControl>
-                            <Switch
-                              id="thermometer"
-                              checked={field.value}
-                              onCheckedChange={field.onChange}
-                            />
-                          </FormControl>
-                          <Label htmlFor="thermometer">Bor</Label>
-                        </div>
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="hasGrounding"
-                    render={({ field }) => (
-                      <FormItem className="flex items-center justify-between">
-                        <FormLabel>Yerga ulanish</FormLabel>
-                        <div className="flex items-center space-x-2">
-                          <Label htmlFor="grounding">Yo'q</Label>
-                          <FormControl>
-                            <Switch
-                              id="grounding"
-                              checked={field.value}
-                              onCheckedChange={field.onChange}
-                            />
-                          </FormControl>
-                          <Label htmlFor="grounding">Bor</Label>
-                        </div>
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="cabinetCondition"
+                    name="cameraIP"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Telekommunikatsiya shkafi atvoli</FormLabel>
+                        <FormLabel>Kamera IP manzili *</FormLabel>
+                        <FormControl>
+                          <Input placeholder="192.168.1.100" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                )}
+              </CardContent>
+            </Card>
+
+            {/* Texnik jihozlar Card */}
+            <Card>
+              <CardHeader>
+                <CardTitle>3. Texnik jihozlar</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-8">
+                <EquipmentSection 
+                  title="Server" 
+                  items={servers} 
+                  type="servers" 
+                />
+
+                <EquipmentSection 
+                  title="Marshrutizator" 
+                  items={routers} 
+                  type="routers" 
+                />
+
+                <EquipmentSection 
+                  title="Kommutator" 
+                  items={switches} 
+                  type="switches" 
+                />
+
+                <div className="grid grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="ups"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>UPS soni</FormLabel>
+                        <FormControl>
+                          <Input 
+                            type="number" 
+                            min="0" 
+                            {...field}
+                            onChange={(e) => field.onChange(parseInt(e.target.value) || 0)}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="stabilizer"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Stabilizator soni</FormLabel>
+                        <FormControl>
+                          <Input 
+                            type="number" 
+                            min="0" 
+                            {...field}
+                            onChange={(e) => field.onChange(parseInt(e.target.value) || 0)}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Qo'shimcha Card */}
+            <Card>
+              <CardHeader>
+                <CardTitle>4. Qo'shimcha ma'lumotlar</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <FormField
+                  control={form.control}
+                  name="hasAirConditioner"
+                  render={({ field }) => (
+                    <FormItem className="flex items-center justify-between">
+                      <FormLabel>Konditsioner</FormLabel>
+                      <div className="flex items-center space-x-2">
+                        <Label htmlFor="air-conditioner">Yo'q</Label>
+                        <FormControl>
+                          <Switch
+                            id="air-conditioner"
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                        <Label htmlFor="air-conditioner">Bor</Label>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+
+                {form.watch("hasAirConditioner") && (
+                  <FormField
+                    control={form.control}
+                    name="airConditionerBTU"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Konditsioner quvvati *</FormLabel>
                         <Select onValueChange={field.onChange} value={field.value}>
                           <FormControl>
                             <SelectTrigger>
-                              <SelectValue placeholder="Holat tanlang" />
+                              <SelectValue placeholder="BTU/h tanlang" />
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            <SelectItem value="yomon">Yomon</SelectItem>
-                            <SelectItem value="o'rta">O'rta</SelectItem>
-                            <SelectItem value="yaxshi">Yaxshi</SelectItem>
+                            <SelectItem value="7000">7000 BTU/h</SelectItem>
+                            <SelectItem value="9000">9000 BTU/h</SelectItem>
+                            <SelectItem value="12000">12000 BTU/h</SelectItem>
+                            <SelectItem value="18000">18000 BTU/h</SelectItem>
+                            <SelectItem value="24000">24000 BTU/h</SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
+                )}
+
+                <FormField
+                  control={form.control}
+                  name="hasCarpet"
+                  render={({ field }) => (
+                    <FormItem className="flex items-center justify-between">
+                      <FormLabel>Polda texnika tagida gilam/kovrolon</FormLabel>
+                      <div className="flex items-center space-x-2">
+                        <Label htmlFor="carpet">Yo'q</Label>
+                        <FormControl>
+                          <Switch
+                            id="carpet"
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                        <Label htmlFor="carpet">Bor</Label>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="cableManagement"
+                  render={({ field }) => (
+                    <FormItem className="flex items-center justify-between">
+                      <FormLabel>Kabel liniyalari tartibga keltirilganligi</FormLabel>
+                      <div className="flex items-center space-x-2">
+                        <Label htmlFor="cable-management">Yo'q</Label>
+                        <FormControl>
+                          <Switch
+                            id="cable-management"
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                        <Label htmlFor="cable-management">Ha</Label>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="hasThermometer"
+                  render={({ field }) => (
+                    <FormItem className="flex items-center justify-between">
+                      <FormLabel>Termometr</FormLabel>
+                      <div className="flex items-center space-x-2">
+                        <Label htmlFor="thermometer">Yo'q</Label>
+                        <FormControl>
+                          <Switch
+                            id="thermometer"
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                        <Label htmlFor="thermometer">Bor</Label>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="hasGrounding"
+                  render={({ field }) => (
+                    <FormItem className="flex items-center justify-between">
+                      <FormLabel>Yerga ulanish</FormLabel>
+                      <div className="flex items-center space-x-2">
+                        <Label htmlFor="grounding">Yo'q</Label>
+                        <FormControl>
+                          <Switch
+                            id="grounding"
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                        <Label htmlFor="grounding">Bor</Label>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="cabinetCondition"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Telekommunikatsiya shkafi ahvoli</FormLabel>
+                      <FormControl>
+                        <RadioGroup
+                          value={field.value}
+                          onValueChange={field.onChange}
+                          className="flex items-center space-x-6"
+                        >
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="yomon" id="cabinet-yomon" />
+                            <Label htmlFor="cabinet-yomon">Yomon</Label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="o'rta" id="cabinet-orta" />
+                            <Label htmlFor="cabinet-orta">O'rta</Label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem value="yaxshi" id="cabinet-yaxshi" />
+                            <Label htmlFor="cabinet-yaxshi">Yaxshi</Label>
+                          </div>
+                        </RadioGroup>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </CardContent>
+            </Card>
+          </div>
 
           <div className="flex justify-end space-x-4">
             <Button 
