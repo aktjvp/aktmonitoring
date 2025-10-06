@@ -14,16 +14,412 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      computers: {
+        Row: {
+          brand: string
+          created_at: string | null
+          department_id: string | null
+          employee_id: string | null
+          id: string
+          inventory_number: string
+          ip_address: string | null
+          mac_address: string | null
+          model: string
+          notes: string | null
+          os: string | null
+          processor: string | null
+          purchase_date: string | null
+          ram: number | null
+          status: string | null
+          storage: number | null
+          storage_type: string | null
+          updated_at: string | null
+          warranty_end_date: string | null
+        }
+        Insert: {
+          brand: string
+          created_at?: string | null
+          department_id?: string | null
+          employee_id?: string | null
+          id?: string
+          inventory_number: string
+          ip_address?: string | null
+          mac_address?: string | null
+          model: string
+          notes?: string | null
+          os?: string | null
+          processor?: string | null
+          purchase_date?: string | null
+          ram?: number | null
+          status?: string | null
+          storage?: number | null
+          storage_type?: string | null
+          updated_at?: string | null
+          warranty_end_date?: string | null
+        }
+        Update: {
+          brand?: string
+          created_at?: string | null
+          department_id?: string | null
+          employee_id?: string | null
+          id?: string
+          inventory_number?: string
+          ip_address?: string | null
+          mac_address?: string | null
+          model?: string
+          notes?: string | null
+          os?: string | null
+          processor?: string | null
+          purchase_date?: string | null
+          ram?: number | null
+          status?: string | null
+          storage?: number | null
+          storage_type?: string | null
+          updated_at?: string | null
+          warranty_end_date?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "computers_department_id_fkey"
+            columns: ["department_id"]
+            isOneToOne: false
+            referencedRelation: "departments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "computers_employee_id_fkey"
+            columns: ["employee_id"]
+            isOneToOne: false
+            referencedRelation: "employees"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      departments: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          email: string | null
+          floor: number | null
+          head_name: string | null
+          id: string
+          name: string
+          phone: string | null
+          room_number: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          email?: string | null
+          floor?: number | null
+          head_name?: string | null
+          id?: string
+          name: string
+          phone?: string | null
+          room_number?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          email?: string | null
+          floor?: number | null
+          head_name?: string | null
+          id?: string
+          name?: string
+          phone?: string | null
+          room_number?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      employees: {
+        Row: {
+          birth_date: string | null
+          created_at: string | null
+          department_id: string | null
+          email: string | null
+          full_name: string
+          hire_date: string | null
+          id: string
+          internal_phone: string | null
+          phone: string | null
+          photo_url: string | null
+          position: string
+          status: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          birth_date?: string | null
+          created_at?: string | null
+          department_id?: string | null
+          email?: string | null
+          full_name: string
+          hire_date?: string | null
+          id?: string
+          internal_phone?: string | null
+          phone?: string | null
+          photo_url?: string | null
+          position: string
+          status?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          birth_date?: string | null
+          created_at?: string | null
+          department_id?: string | null
+          email?: string | null
+          full_name?: string
+          hire_date?: string | null
+          id?: string
+          internal_phone?: string | null
+          phone?: string | null
+          photo_url?: string | null
+          position?: string
+          status?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "employees_department_id_fkey"
+            columns: ["department_id"]
+            isOneToOne: false
+            referencedRelation: "departments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      phones: {
+        Row: {
+          brand: string
+          created_at: string | null
+          department_id: string | null
+          employee_id: string | null
+          id: string
+          imei: string | null
+          inventory_number: string
+          model: string
+          notes: string | null
+          phone_number: string | null
+          purchase_date: string | null
+          status: string | null
+          updated_at: string | null
+          warranty_end_date: string | null
+        }
+        Insert: {
+          brand: string
+          created_at?: string | null
+          department_id?: string | null
+          employee_id?: string | null
+          id?: string
+          imei?: string | null
+          inventory_number: string
+          model: string
+          notes?: string | null
+          phone_number?: string | null
+          purchase_date?: string | null
+          status?: string | null
+          updated_at?: string | null
+          warranty_end_date?: string | null
+        }
+        Update: {
+          brand?: string
+          created_at?: string | null
+          department_id?: string | null
+          employee_id?: string | null
+          id?: string
+          imei?: string | null
+          inventory_number?: string
+          model?: string
+          notes?: string | null
+          phone_number?: string | null
+          purchase_date?: string | null
+          status?: string | null
+          updated_at?: string | null
+          warranty_end_date?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "phones_department_id_fkey"
+            columns: ["department_id"]
+            isOneToOne: false
+            referencedRelation: "departments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "phones_employee_id_fkey"
+            columns: ["employee_id"]
+            isOneToOne: false
+            referencedRelation: "employees"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      printers: {
+        Row: {
+          brand: string
+          created_at: string | null
+          department_id: string | null
+          id: string
+          inventory_number: string
+          ip_address: string | null
+          location: string | null
+          model: string
+          notes: string | null
+          printer_type: string | null
+          purchase_date: string | null
+          status: string | null
+          updated_at: string | null
+          warranty_end_date: string | null
+        }
+        Insert: {
+          brand: string
+          created_at?: string | null
+          department_id?: string | null
+          id?: string
+          inventory_number: string
+          ip_address?: string | null
+          location?: string | null
+          model: string
+          notes?: string | null
+          printer_type?: string | null
+          purchase_date?: string | null
+          status?: string | null
+          updated_at?: string | null
+          warranty_end_date?: string | null
+        }
+        Update: {
+          brand?: string
+          created_at?: string | null
+          department_id?: string | null
+          id?: string
+          inventory_number?: string
+          ip_address?: string | null
+          location?: string | null
+          model?: string
+          notes?: string | null
+          printer_type?: string | null
+          purchase_date?: string | null
+          status?: string | null
+          updated_at?: string | null
+          warranty_end_date?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "printers_department_id_fkey"
+            columns: ["department_id"]
+            isOneToOne: false
+            referencedRelation: "departments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string | null
+          full_name: string
+          id: string
+          phone: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string | null
+          full_name: string
+          id: string
+          phone?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string | null
+          full_name?: string
+          id?: string
+          phone?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      turnstiles: {
+        Row: {
+          created_at: string | null
+          id: string
+          installation_date: string | null
+          ip_address: string | null
+          last_maintenance_date: string | null
+          location: string
+          model: string | null
+          name: string
+          notes: string | null
+          status: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          installation_date?: string | null
+          ip_address?: string | null
+          last_maintenance_date?: string | null
+          location: string
+          model?: string | null
+          name: string
+          notes?: string | null
+          status?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          installation_date?: string | null
+          ip_address?: string | null
+          last_maintenance_date?: string | null
+          location?: string
+          model?: string | null
+          name?: string
+          notes?: string | null
+          status?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string | null
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "moderator" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +546,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "moderator", "user"],
+    },
   },
 } as const
