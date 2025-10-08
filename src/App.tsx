@@ -16,6 +16,7 @@ import AddComputer from "./pages/AddComputer";
 import EditComputer from "./pages/EditComputer";
 import Phones from "./pages/Phones";
 import AddPhone from "./pages/AddPhone";
+import EditPhone from "./pages/EditPhone";
 import Printers from "./pages/Printers";
 import AddPrinter from "./pages/AddPrinter";
 import Serverxonalar from "./pages/Serverxonalar";
@@ -44,6 +45,7 @@ const App = () => (
             <Route path="computers/edit/:id" element={<EditComputer />} />
             <Route path="phones" element={<Phones />} />
             <Route path="phones/add" element={<AddPhone />} />
+            <Route path="phones/edit/:id" element={<EditPhone />} />
             <Route path="printers" element={<Printers />} />
             <Route path="printers/add" element={<AddPrinter />} />
             <Route path="serverxonalar" element={<Serverxonalar />} />

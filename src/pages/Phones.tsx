@@ -18,7 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Plus, Search, Filter, Edit, Eye, Smartphone } from "lucide-react";
+import { Plus, Search, Filter, Edit, Smartphone } from "lucide-react";
 import { Link } from "react-router-dom";
 
 // Mock data based on AddPhone form
@@ -380,14 +380,15 @@ export default function Phones() {
                       </div>
                     </TableCell>
                     <TableCell>
-                      <div className="flex gap-2">
-                        <Button variant="outline" size="sm">
-                          <Eye className="h-4 w-4" />
-                        </Button>
-                        <Button variant="outline" size="sm">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        asChild
+                      >
+                        <Link to={`/phones/edit/${phone.id}`}>
                           <Edit className="h-4 w-4" />
-                        </Button>
-                      </div>
+                        </Link>
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}
