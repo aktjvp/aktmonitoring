@@ -18,7 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Plus, Search, Filter, Edit, Eye, Monitor } from "lucide-react";
+import { Plus, Search, Filter, Edit, Monitor } from "lucide-react";
 import { Link } from "react-router-dom";
 
 // Mock data
@@ -573,14 +573,15 @@ export default function Computers() {
                       </div>
                     </TableCell>
                     <TableCell>
-                      <div className="flex gap-2">
-                        <Button variant="outline" size="sm">
-                          <Eye className="h-4 w-4" />
-                        </Button>
-                        <Button variant="outline" size="sm">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        asChild
+                      >
+                        <Link to={`/computers/edit/${computer.id}`}>
                           <Edit className="h-4 w-4" />
-                        </Button>
-                      </div>
+                        </Link>
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}
