@@ -19,6 +19,7 @@ import AddPhone from "./pages/AddPhone";
 import EditPhone from "./pages/EditPhone";
 import Printers from "./pages/Printers";
 import AddPrinter from "./pages/AddPrinter";
+import EditPrinter from "./pages/EditPrinter";
 import Serverxonalar from "./pages/Serverxonalar";
 import Turniketlar from "./pages/Turniketlar";
 import Reports from "./pages/Reports";
@@ -48,6 +49,7 @@ const App = () => (
             <Route path="phones/edit/:id" element={<EditPhone />} />
             <Route path="printers" element={<Printers />} />
             <Route path="printers/add" element={<AddPrinter />} />
+            <Route path="printers/edit/:id" element={<EditPrinter />} />
             <Route path="serverxonalar" element={<Serverxonalar />} />
             <Route path="add-serverroom" element={<AddServerRoom />} />
             <Route path="turniketlar" element={<Turniketlar />} />

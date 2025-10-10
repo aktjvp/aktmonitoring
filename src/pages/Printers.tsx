@@ -18,7 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Plus, Search, Filter, Edit, Eye, Printer, Wifi, Cable } from "lucide-react";
+import { Plus, Search, Filter, Edit, Printer, Wifi, Cable } from "lucide-react";
 import { Link } from "react-router-dom";
 
 // Mock data based on AddPrinter form
@@ -423,14 +423,11 @@ export default function Printers() {
                       </div>
                     </TableCell>
                     <TableCell>
-                      <div className="flex gap-2">
-                        <Button variant="outline" size="sm">
-                          <Eye className="h-4 w-4" />
-                        </Button>
+                      <Link to={`/printers/edit/${printer.id}`}>
                         <Button variant="outline" size="sm">
                           <Edit className="h-4 w-4" />
                         </Button>
-                      </div>
+                      </Link>
                     </TableCell>
                   </TableRow>
                 ))}
